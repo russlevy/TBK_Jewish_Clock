@@ -10,6 +10,7 @@
 		000027100000000562001093 /* my_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 000027100000000562001069 /* my_math.c */; };
 		000027100000000562001094 /* suncalc.c in Sources */ = {isa = PBXBuildFile; fileRef = 000027100000000562001071 /* suncalc.c */; };
 		000027100000000562001095 /* TBK_Hebrew_Clock.c in Sources */ = {isa = PBXBuildFile; fileRef = 000027100000000562001073 /* TBK_Hebrew_Clock.c */; };
+		429C59B1174BA6B800E0C2C3 /* hebrewdate.c in Sources */ = {isa = PBXBuildFile; fileRef = 429C59AF174B6CF900E0C2C3 /* hebrewdate.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -485,6 +486,7 @@
 				000027100000000562001093 /* my_math.c in Sources */,
 				000027100000000562001094 /* suncalc.c in Sources */,
 				000027100000000562001095 /* TBK_Hebrew_Clock.c in Sources */,
+				429C59B1174BA6B800E0C2C3 /* hebrewdate.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

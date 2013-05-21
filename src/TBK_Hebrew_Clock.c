@@ -1,3 +1,9 @@
+// TBK Hebrew Clock
+// A Jewish calendar/zmanim watch face for the Pebble
+// Copyright (C) 2013 Ary Tebeka contact@arytbk.net
+// Open Source - feel free to use, modify, contribute
+// Attribution and comments welcome
+
 #include "TBK_Hebrew_Clock.h"
 
 // MAIN - starts the app
