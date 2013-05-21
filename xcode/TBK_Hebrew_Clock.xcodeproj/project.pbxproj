@@ -47,6 +47,8 @@
 		429C59AB174B571C00E0C2C3 /* index_dummy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = index_dummy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		429C59AD174B571C00E0C2C3 /* clar_tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = clar_tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		429C59AE174B573D00E0C2C3 /* TBK_Hebrew_Clock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBK_Hebrew_Clock.h; sourceTree = "<group>"; };
+		429C59AF174B6CF900E0C2C3 /* hebrewdate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hebrewdate.c; sourceTree = "<group>"; };
+		429C59B0174B6D0500E0C2C3 /* hebrewdate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hebrewdate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -144,6 +146,8 @@
 				000027100000000562001072 /* suncalc.h */,
 				000027100000000562001073 /* TBK_Hebrew_Clock.c */,
 				429C59AE174B573D00E0C2C3 /* TBK_Hebrew_Clock.h */,
+				429C59AF174B6CF900E0C2C3 /* hebrewdate.c */,
+				429C59B0174B6D0500E0C2C3 /* hebrewdate.h */,
 			);
 			path = src;
 			sourceTree = "<group>";

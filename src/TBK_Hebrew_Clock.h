@@ -3,6 +3,8 @@
 #include "pebble_fonts.h"
 #include "my_math.h"
 #include "suncalc.h"
+#include "xprintf.h"
+#include "hebrewdate.h"
 #include "config.h"
 
 // App Configuration
@@ -36,6 +38,7 @@ void updateWatch();
 void dayHasChanged();
 void hourHasChanged();
 void minuteHasChanged();
+void updateHebrewDate();
 void updateMoon();
 void updateZmanim();
 void adjustTimezone(float* time);

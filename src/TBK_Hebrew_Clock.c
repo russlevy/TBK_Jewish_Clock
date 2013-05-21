@@ -107,6 +107,7 @@ void updateWatch() {
 
 // Called once per day at midnight, and once at startup
 void dayHasChanged() {
+  updateHebrewDate();
   updateMoon();
   updateZmanim();
 }
@@ -121,6 +122,19 @@ void minuteHasChanged() {
   // Display Time
   string_format_time(timeString, sizeof(timeString), timeFormat, &currentTime);
   text_layer_set_text(&timeLayer, timeString);
+}
+
+// Update Hebrew Date
+void updateHebrewDate() {
+  int julianDay = hdate_gdate_to_jd(currentTime.tm_mday, currentTime.tm_mon + 1, currentTime.tm_year + 1900);
+  // Convert julian day to hebrew date
+  int hDay, hMonth, hYear, hDayTishrey, hNextTishrey;
+  hdate_jd_to_hdate(julianDay, &hDay, &hMonth, &hYear, &hDayTishrey, &hNextTishrey);
+  // Format hebrew date and show
+  char *hebrewMonthName = hdate_get_month_string(hMonth);
+  xsprintf(hebrewDateString, "%d %s", hDay, hebrewMonthName);
+//  xsprintf(hebrewDateString, "%d/%d/%d",hDay,hMonth,hYear);
+  text_layer_set_text(&hebrewDateLayer, hebrewDateString);
 }
 
 // Update MOON phase
