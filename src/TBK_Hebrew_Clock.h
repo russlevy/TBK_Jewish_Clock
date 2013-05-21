@@ -28,6 +28,7 @@ TextLayer timeLayer;          char timeString[]=        "00:00";
 TextLayer sunriseLayer;       char sunriseString[]=     "00:00";
 TextLayer sunsetLayer;        char sunsetString[]=      "00:00";
 TextLayer hatsotLayer;        char hatsotString[]=      "00:00";
+TextLayer dateLayer;          char dateString[]=        "Wednesday September 31";
 TextLayer hebrewDateLayer;    char hebrewDateString[]=  "17 Cheshvan 5773";
 TextLayer moonLayer;          char moonString[]=        " ";
 
@@ -35,10 +36,13 @@ TextLayer moonLayer;          char moonString[]=        " ";
 Layer lineLayer;
 
 // Keep current time so its available in all functions
-PblTm currentTime;
+PblTm currentPblTime;
 
 // Format string to use for times (must change according to 24h or 12h option)
 char *timeFormat;
+
+// Zmanim
+float currentTime, sunriseTime, sunsetTime, hatsotTime, zmanHourDuration;
 
 // Functions declarations (to allow for more readable code!
 void handle_init(AppContextRef ctx);
@@ -47,6 +51,7 @@ void updateWatch();
 void dayHasChanged();
 void hourHasChanged();
 void minuteHasChanged();
+void updateDate();
 void updateHebrewDate();
 void updateMoon();
 void updateZmanim();

@@ -31,6 +31,14 @@ void handle_init(AppContextRef ctx) {
   // Init time format string
   timeFormat = clock_is_24h_style()?"%R":"%I:%M";
   
+  // Init the text layer used to show the gregorian date
+  text_layer_init(&dateLayer, GRect(0, 85, 144, 22));
+  text_layer_set_text_color(&dateLayer, GColorWhite);
+  text_layer_set_background_color(&dateLayer, GColorClear);
+  text_layer_set_text_alignment(&dateLayer, GTextAlignmentCenter);
+  text_layer_set_font(&dateLayer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));;
+  layer_add_child(&window.layer, &dateLayer.layer);
+  
   // Init the text layer used to show the hebrew date
   text_layer_init(&hebrewDateLayer, GRect(0, 0, 144, 25));
   text_layer_set_text_color(&hebrewDateLayer, GColorWhite);
@@ -102,15 +110,16 @@ void updateWatch() {
   static int currentYDay = -1;
   static int currentHour = -1;
   
-  get_time(&currentTime);
+  get_time(&currentPblTime);
+  currentTime = ((float)currentPblTime.tm_hour) + ((float)currentPblTime.tm_min)/60.0;
   
   // call update functions as requires, daily first, then hourly, then minute
-  if(currentTime.tm_yday != currentYDay) {  // Day has changed, or app just started
-    currentYDay = currentTime.tm_yday;
+  if(currentPblTime.tm_yday != currentYDay) {  // Day has changed, or app just started
+    currentYDay = currentPblTime.tm_yday;
     dayHasChanged();
   }
-  if(currentTime.tm_hour != currentHour) {  // Hour has changed, or app just started
-    currentHour = currentTime.tm_hour;
+  if(currentPblTime.tm_hour != currentHour) {  // Hour has changed, or app just started
+    currentHour = currentPblTime.tm_hour;
     hourHasChanged();
   }
   minuteHasChanged();
@@ -118,6 +127,7 @@ void updateWatch() {
 
 // Called once per day at midnight, and once at startup
 void dayHasChanged() {
+  updateDate();
   updateHebrewDate();
   updateMoon();
   updateZmanim();
@@ -131,13 +141,19 @@ void hourHasChanged() {
 // Called once per minute, and once at startup
 void minuteHasChanged() {
   // Display Time
-  string_format_time(timeString, sizeof(timeString), timeFormat, &currentTime);
+  string_format_time(timeString, sizeof(timeString), timeFormat, &currentPblTime);
   text_layer_set_text(&timeLayer, timeString);
+}
+
+// Update Gregorian Date
+void updateDate() {
+  string_format_time(dateString, sizeof(dateString), "%A %B %e", &currentPblTime);
+  text_layer_set_text(&dateLayer, dateString);
 }
 
 // Update Hebrew Date
 void updateHebrewDate() {
-  int julianDay = hdate_gdate_to_jd(currentTime.tm_mday, currentTime.tm_mon + 1, currentTime.tm_year + 1900);
+  int julianDay = hdate_gdate_to_jd(currentPblTime.tm_mday, currentPblTime.tm_mon + 1, currentPblTime.tm_year + 1900);
   // Convert julian day to hebrew date
   int hDay, hMonth, hYear, hDayTishrey, hNextTishrey;
   hdate_jd_to_hdate(julianDay, &hDay, &hMonth, &hYear, &hDayTishrey, &hNextTishrey);
@@ -150,7 +166,7 @@ void updateHebrewDate() {
 
 // Update MOON phase
 void updateMoon() {
-  int moonphase_number = moon_phase(tm2jd(&currentTime));
+  int moonphase_number = moon_phase(tm2jd(&currentPblTime));
   // correct for southern hemisphere
   if ((moonphase_number > 0) && (LATITUDE < 0))
   moonphase_number = 28 - moonphase_number;
@@ -171,9 +187,14 @@ void updateMoon() {
 // Update zmanim
 void updateZmanim() {
   PblTm pblTime;
-  float sunriseTime = calcSunRise(currentTime.tm_year, currentTime.tm_mon+1, currentTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
-  float sunsetTime = calcSunSet(currentTime.tm_year, currentTime.tm_mon+1, currentTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
-	float hatsotTime = (sunriseTime+sunsetTime)/2.0f;
+  sunriseTime = calcSunRise(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
+  sunsetTime = calcSunSet(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
+	hatsotTime = (sunriseTime+sunsetTime)/2.0f;
+  if((currentTime >= sunriseTime) && (currentTime <= sunsetTime)) { // Day
+    zmanHourDuration = (sunsetTime - sunriseTime)/12.0;
+  } else {  // Night
+    zmanHourDuration = (24.0 - (sunsetTime-sunriseTime))/12.0;
+  }
   
   adjustTimezone(&sunriseTime);
   adjustTimezone(&sunsetTime);
