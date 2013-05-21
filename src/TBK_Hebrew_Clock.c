@@ -29,7 +29,7 @@ void handle_init(AppContextRef ctx) {
   text_layer_init(&hebrewDateLayer, GRect(0, 0, 144, 25));
   text_layer_set_text_color(&hebrewDateLayer, GColorWhite);
   text_layer_set_background_color(&hebrewDateLayer, GColorClear);
-  text_layer_set_text_alignment(&hebrewDateLayer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(&hebrewDateLayer, GTextAlignmentLeft);
   text_layer_set_font(&hebrewDateLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_ROBOTO_CONDENSED_21)));
   layer_add_child(&window.layer, &hebrewDateLayer.layer);
   
@@ -42,11 +42,11 @@ void handle_init(AppContextRef ctx) {
   layer_add_child(&window.layer, &timeLayer.layer);
   
   // Init the text layer used to show the moon phase
-  text_layer_init(&moonLayer, GRect(0, 85, 144 /* width */, 168-115 /* height */));
+  text_layer_init(&moonLayer, GRect(0, 0, 144 /* width */, 168-115 /* height */));
   text_layer_set_text_color(&moonLayer, GColorWhite);
   text_layer_set_background_color(&moonLayer, GColorClear);
   text_layer_set_font(&moonLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MOON_PHASES_SUBSET_30)));
-  text_layer_set_text_alignment(&moonLayer, GTextAlignmentCenter);
+  text_layer_set_text_alignment(&moonLayer, GTextAlignmentRight);
   layer_add_child(&window.layer, &moonLayer.layer);
   
   // Init the text layer used to show the Sunrise hour
@@ -75,6 +75,11 @@ void handle_init(AppContextRef ctx) {
   text_layer_set_font(&sunsetLayer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
   text_layer_set_text_alignment(&sunsetLayer, GTextAlignmentRight);
   layer_add_child(&window.layer, &sunsetLayer.layer);
+  
+  // Init line layer
+  layer_init(&lineLayer, window.layer.frame);
+  lineLayer.update_proc = &line_layer_update_callback;
+  layer_add_child(&window.layer, &lineLayer);
   
   updateWatch();  // update display at startup to avoid empty screen until next tick
 }
@@ -185,6 +190,16 @@ void updateZmanim() {
 }
 
 // Utility functions
+
+// Draw line
+void line_layer_update_callback(Layer *me, GContext* ctx) {
+  (void)me;
+  
+  graphics_context_set_stroke_color(ctx, GColorWhite);
+  
+  graphics_draw_line(ctx, GPoint(0, 82), GPoint(144, 82));
+  graphics_draw_line(ctx, GPoint(0, 83), GPoint(144, 83));
+}
 
 void adjustTimezone(float* time)
 {

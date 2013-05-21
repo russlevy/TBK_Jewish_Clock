@@ -25,6 +25,9 @@ TextLayer hatsotLayer;        char hatsotString[]=      "00:00";
 TextLayer hebrewDateLayer;    char hebrewDateString[]=  "17 Cheshvan 5773";
 TextLayer moonLayer;          char moonString[]=        " ";
 
+// Other Layers
+Layer lineLayer;
+
 // Keep current time so its available in all functions
 PblTm currentTime;
 
@@ -41,6 +44,7 @@ void minuteHasChanged();
 void updateHebrewDate();
 void updateMoon();
 void updateZmanim();
+void line_layer_update_callback(Layer *me, GContext* ctx);
 void adjustTimezone(float* time);
 int tm2jd(PblTm *time);
 int moon_phase(int jdn);
