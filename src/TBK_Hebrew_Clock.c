@@ -190,11 +190,21 @@ void updateZmanim() {
   sunriseTime = calcSunRise(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
   sunsetTime = calcSunSet(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
 	hatsotTime = (sunriseTime+sunsetTime)/2.0f;
+
+  float zmanTime;
   if((currentTime >= sunriseTime) && (currentTime <= sunsetTime)) { // Day
     zmanHourDuration = (sunsetTime - sunriseTime)/12.0;
+    zmanTime = (currentTime-sunriseTime)/zmanHourDuration;
   } else {  // Night
     zmanHourDuration = (24.0 - (sunsetTime-sunriseTime))/12.0;
+    if(currentTime < sunriseTime) {
+      zmanTime = (12.0+currentTime-sunsetTime)/zmanHourDuration;
+    } else {
+      zmanTime = (currentTime - sunsetTime)/zmanHourDuration;
+    }
   }
+  zmanHourNumber = ((int)zmanTime)+1;
+  float timeUntilNext = zmanHourDuration * (1 - (zmanTime - (zmanHourNumber-1)));
   
   adjustTimezone(&sunriseTime);
   adjustTimezone(&sunsetTime);

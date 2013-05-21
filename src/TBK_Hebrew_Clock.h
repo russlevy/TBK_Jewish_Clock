@@ -28,6 +28,7 @@ TextLayer timeLayer;          char timeString[]=        "00:00";
 TextLayer sunriseLayer;       char sunriseString[]=     "00:00";
 TextLayer sunsetLayer;        char sunsetString[]=      "00:00";
 TextLayer hatsotLayer;        char hatsotString[]=      "00:00";
+TextLayer zmanHourLayer;      char zmanHourString[]=    "Hour #11 - Next in 1:07";
 TextLayer dateLayer;          char dateString[]=        "Wednesday September 31";
 TextLayer hebrewDateLayer;    char hebrewDateString[]=  "17 Cheshvan 5773";
 TextLayer moonLayer;          char moonString[]=        " ";
@@ -43,6 +44,7 @@ char *timeFormat;
 
 // Zmanim
 float currentTime, sunriseTime, sunsetTime, hatsotTime, zmanHourDuration;
+int zmanHourNumber;
 
 // Functions declarations (to allow for more readable code!
 void handle_init(AppContextRef ctx);
