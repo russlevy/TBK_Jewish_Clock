@@ -1,3 +1,5 @@
+// Extracted from http://libhdate.sourceforge.net
+// Adaptation by Ary Tebeka @arytbk
 
 /**
  @brief Compute Julian day from Gregorian date

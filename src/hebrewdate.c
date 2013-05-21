@@ -1,3 +1,6 @@
+// Extracted from http://libhdate.sourceforge.net
+// Adaptation by Ary Tebeka @arytbk
+
 #include "hebrewdate.h"
 
 #define HOUR 1080
@@ -12,8 +15,6 @@ char *hebrewMonthNames[14] = {
   "Sh'vat", "Adar", "Nisan", "Iyyar",
   "Sivan", "Tammuz", "Av", "Elul", "Adar I",
   "Adar II"};
-
-
 
 /**
  @brief Compute Julian day from Gregorian day, month and year
