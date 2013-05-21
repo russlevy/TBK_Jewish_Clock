@@ -91,28 +91,44 @@ void updateWatch() {
   static int currentYDay = -1;
   static int currentHour = -1;
   
-  PblTm currentTime;
   get_time(&currentTime);
   
   // call update functions as requires, daily first, then hourly, then minute
   if(currentTime.tm_yday != currentYDay) {  // Day has changed, or app just started
     currentYDay = currentTime.tm_yday;
-    dayHasChanged(&currentTime);
+    dayHasChanged();
   }
   if(currentTime.tm_hour != currentHour) {  // Hour has changed, or app just started
     currentHour = currentTime.tm_hour;
-    hourHasChanged(&currentTime);
+    hourHasChanged();
   }
-  minuteHasChanged(&currentTime);
+  minuteHasChanged();
 }
 
 // Called once per day at midnight, and once at startup
-void dayHasChanged(PblTm *currentTime) {
-  // Update moon phase
-  int moonphase_number = moon_phase(tm2jd(currentTime));
+void dayHasChanged() {
+  updateMoon();
+  updateZmanim();
+}
+
+// Called once per hour when minute becomes 0, and once at startup
+void hourHasChanged() {
+  
+}
+
+// Called once per minute, and once at startup
+void minuteHasChanged() {
+  // Display Time
+  string_format_time(timeString, sizeof(timeString), timeFormat, &currentTime);
+  text_layer_set_text(&timeLayer, timeString);
+}
+
+// Update MOON phase
+void updateMoon() {
+  int moonphase_number = moon_phase(tm2jd(&currentTime));
   // correct for southern hemisphere
   if ((moonphase_number > 0) && (LATITUDE < 0))
-    moonphase_number = 28 - moonphase_number;
+  moonphase_number = 28 - moonphase_number;
   // select correct font char
   if (moonphase_number == 14)
   {
@@ -127,22 +143,42 @@ void dayHasChanged(PblTm *currentTime) {
   text_layer_set_text(&moonLayer, moonString);
 }
 
-// Called once per hour when minute becomes 0, and once at startup
-void hourHasChanged(PblTm *currentTime) {
+// Update zmanim
+void updateZmanim() {
+  PblTm pblTime;
+  float sunriseTime = calcSunRise(currentTime.tm_year, currentTime.tm_mon+1, currentTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
+  float sunsetTime = calcSunSet(currentTime.tm_year, currentTime.tm_mon+1, currentTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
+	float hatsotTime = (sunriseTime+sunsetTime)/2.0f;
   
-}
-
-// Called once per minute, and once at startup
-void minuteHasChanged(PblTm *currentTime) {
-  // Display Time
-  string_format_time(timeString, sizeof(timeString), timeFormat, currentTime);
-  text_layer_set_text(&timeLayer, timeString);
+  adjustTimezone(&sunriseTime);
+  adjustTimezone(&sunsetTime);
+	adjustTimezone(&hatsotTime);
+  
+  pblTime.tm_min = (int)(60*(sunriseTime-((int)(sunriseTime))));
+  pblTime.tm_hour = (int)sunriseTime;
+  string_format_time(sunriseString, sizeof(sunriseString), timeFormat, &pblTime);
+  text_layer_set_text(&sunriseLayer, sunriseString);
+  
+  pblTime.tm_min = (int)(60*(hatsotTime-((int)(hatsotTime))));
+  pblTime.tm_hour = (int)hatsotTime;
+  string_format_time(hatsotString, sizeof(hatsotString), timeFormat, &pblTime);
+  text_layer_set_text(&hatsotLayer, hatsotString);
+  
+  pblTime.tm_min = (int)(60*(sunsetTime-((int)(sunsetTime))));
+  pblTime.tm_hour = (int)sunsetTime;
+  string_format_time(sunsetString, sizeof(sunsetString), timeFormat, &pblTime);
+  text_layer_set_text(&sunsetLayer, sunsetString);
 }
 
 // Utility functions
 
 void adjustTimezone(float* time)
 {
+  // ****************** warning tm_idst is not implemented yet, find another way! ********************
+  if (ISDST)
+  {
+    *time += 1.0;
+  }
   *time += TIMEZONE;
   if (*time > 24) *time -= 24;
   if (*time < 0) *time += 24;

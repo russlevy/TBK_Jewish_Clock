@@ -23,6 +23,9 @@ TextLayer hatsotLayer;        char hatsotString[]=      "00:00";
 TextLayer hebrewDateLayer;    char hebrewDateString[]=  "17 Cheshvan 5773";
 TextLayer moonLayer;          char moonString[]=        " ";
 
+// Keep current time so its available in all functions
+PblTm currentTime;
+
 // Format string to use for times (must change according to 24h or 12h option)
 char *timeFormat;
 
@@ -30,9 +33,11 @@ char *timeFormat;
 void handle_init(AppContextRef ctx);
 void handle_minute_tick(AppContextRef ctx, PebbleTickEvent *t);
 void updateWatch();
-void dayHasChanged(PblTm *currentTime);
-void hourHasChanged(PblTm *currentTime);
-void minuteHasChanged(PblTm *currentTime);
+void dayHasChanged();
+void hourHasChanged();
+void minuteHasChanged();
+void updateMoon();
+void updateZmanim();
 void adjustTimezone(float* time);
 int tm2jd(PblTm *time);
 int moon_phase(int jdn);
