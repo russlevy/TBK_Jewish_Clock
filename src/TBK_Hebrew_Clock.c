@@ -4,6 +4,8 @@
 // Open Source - feel free to use, modify, contribute
 // Attribution and comments welcome
 
+// Parts from KP_Sun_Moon_Vibe_Clock - https://github.com/KarbonPebbler/KP_Sun_Moon_Vibe_Clock
+
 #include "TBK_Hebrew_Clock.h"
 
 // MAIN - starts the app
@@ -85,7 +87,7 @@ void handle_init(AppContextRef ctx) {
   
   // Line
   layer_init(&lineLayer, window.layer.frame);
-  lineLayer.update_proc = &line_layer_update_callback;
+  lineLayer.update_proc = &lineLayerUpdate;
   layer_add_child(&window.layer, &lineLayer);
   
   // Zman hours labels
@@ -104,6 +106,12 @@ void handle_init(AppContextRef ctx) {
   text_layer_set_font(&nextHourLabelLayer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));;
   layer_add_child(&window.layer, &nextHourLabelLayer.layer);
   text_layer_set_text(&nextHourLabelLayer, nextHourLabelString);
+  
+  // Sun Graph
+  layer_init(&sunGraphLayer, GRect(72-sunSize/2, sunY, sunSize, sunSize));
+  sunGraphLayer.update_proc = &sunGraphLayerUpdate;
+  layer_set_clips(&sunGraphLayer, true);
+  layer_add_child(&window.layer, &sunGraphLayer);
   
   // Zman hour number
   text_layer_init(&zmanHourLayer, GRect(0, 108, 144, 25));
@@ -152,13 +160,34 @@ void handle_init(AppContextRef ctx) {
 }
 
 // Draw line
-void line_layer_update_callback(Layer *me, GContext* ctx) {
+void lineLayerUpdate(Layer *me, GContext* ctx) {
   (void)me;
   graphics_context_set_stroke_color(ctx, GColorWhite);
   graphics_draw_line(ctx, GPoint(0, 97), GPoint(144, 97));
   graphics_draw_line(ctx, GPoint(0, 98), GPoint(144, 98));
 }
 
+// Draw sun graph
+void sunGraphLayerUpdate(Layer *me, GContext* ctx)
+{
+  (void)me;
+  // Draw white circle
+  graphics_context_set_fill_color(ctx, GColorWhite);
+  GPoint sunCenter = grect_center_point(&sunGraphLayer.frame);
+  graphics_fill_circle(ctx, GPoint(sunSize/2, sunSize/2), sunSize/2);
+  
+  // Must fill night part with black
+  graphics_context_set_fill_color(ctx, GColorBlack);
+  gpath_init(&sun_path, &sun_path_info);
+  gpath_move_to(&sun_path, GPoint(sunSize/2, sunSize/2));
+  gpath_draw_filled(ctx, &sun_path);
+}
+
+void handle_deinit(AppContextRef ctx) {
+  (void)ctx;
+}
+
+// ************* TICK HANDLER *****************
 // Handles the system minute-tick, calls appropriate functions below
 void handle_minute_tick(AppContextRef ctx, PebbleTickEvent *t) {
   (void)t;
@@ -166,7 +195,7 @@ void handle_minute_tick(AppContextRef ctx, PebbleTickEvent *t) {
   updateWatch();
 }
 
-// Update watch as needed
+// ************* Update watch as needed, calls required update functions at the right times, and once at startup
 void updateWatch() {
   static int currentYDay = -1;
   static int currentHour = -1;
@@ -249,7 +278,7 @@ void updateMoonAndSun() {
   }
   text_layer_set_text(&moonLayer, moonString);
   
-  // ******************* SUN
+  // ******************* SUN TIMES
   sunriseTime = calcSunRise(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
   sunsetTime = calcSunSet(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
 	hatsotTime = (sunriseTime+sunsetTime)/2.0f;
@@ -273,6 +302,14 @@ void updateMoonAndSun() {
   pblTime.tm_hour = (int)sunsetTime;
   string_format_time(sunsetString, sizeof(sunsetString), timeFormat, &pblTime);
   text_layer_set_text(&sunsetLayer, sunsetString);
+  
+  // SUN GRAPHIC
+  float rise2 = sunriseTime+12.0f;
+  sun_path_info.points[1].x = (int16_t)(my_sin(rise2/24 * M_PI * 2) * 120);
+  sun_path_info.points[1].y = -(int16_t)(my_cos(rise2/24 * M_PI * 2) * 120);
+  float set2 =   sunsetTime+12.0f;
+  sun_path_info.points[4].x = (int16_t)(my_sin(set2/24 * M_PI * 2) * 120);
+  sun_path_info.points[4].y = -(int16_t)(my_cos(set2/24 * M_PI * 2) * 120);
 }
 
 // Update zmanim
@@ -300,13 +337,21 @@ void updateZmanim() {
   int nextHour = (int)timeUntilNextHour;
   int nextMinute = (int)((timeUntilNextHour - ((float)nextHour))*60);
   xsprintf(zmanHourString, "%d", zmanHourNumber);
-  xsprintf(nextHourString, "%d:%d",nextHour, nextMinute);
+  xsprintf(nextHourString, "%d:%02d",nextHour, nextMinute);
   text_layer_set_text(&zmanHourLayer, zmanHourString);
   text_layer_set_text(&nextHourLayer, nextHourString);
 }
 
 // Update time
 void updateTime() {
+  /*
+  char time_text[]="00:00";
+  string_format_time(time_text, sizeof(time_text), timeFormat, &currentPblTime);
+  if (!clock_is_24h_style() && (time_text[0] == '0'))
+  {
+    memmove(time_text, &time_text[1], sizeof(time_text) - 1);
+  }
+  */
   string_format_time(timeString, sizeof(timeString), timeFormat, &currentPblTime);
   text_layer_set_text(&timeLayer, timeString);
 }
@@ -342,3 +387,9 @@ int moon_phase(int jdn)
   jd -= (int)jd;
   return (int)(jd*27 + 0.5); /* scale fraction from 0-27 and round by adding 0.5 */
 }
+
+float get24HourAngle(int hours, int minutes)
+{
+  return (12.0f + hours + (minutes/60.0f)) / 24.0f;
+}
+

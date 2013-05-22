@@ -4,6 +4,8 @@
 // Open Source - feel free to use, modify, contribute
 // Attribution and comments welcome
 
+// Parts from KP_Sun_Moon_Vibe_Clock - https://github.com/KarbonPebbler/KP_Sun_Moon_Vibe_Clock
+
 #include "pebble_os.h"
 #include "pebble_app.h"
 #include "pebble_fonts.h"
@@ -28,7 +30,9 @@ AppContextRef appContext;
 // ******************************************
 TextLayer dayLayer;           char dayString[]=           "17";
 TextLayer hDayLayer;          char hDayString[]=          "13";
+
 TextLayer moonLayer;          char moonString[]=          " ";
+
 TextLayer monthLayer;         char monthString[]=         "May";
 TextLayer hMonthLayer;        // char hMonthString[]=      "Cheshvan";
 
@@ -37,6 +41,11 @@ Layer lineLayer;
 
 TextLayer zmanHourLabelLayer; char zmanHourLabelString[]= "Hour #";
 TextLayer nextHourLabelLayer; char nextHourLabelString[]= "Next In:";
+
+Layer sunGraphLayer;
+const int sunY = 107;
+const int sunSize = 36;
+
 TextLayer zmanHourLayer;      char zmanHourString[]=      "11";
 TextLayer nextHourLayer;      char nextHourString[]=      "01:07:00";
 
@@ -55,11 +64,27 @@ char *timeFormat;
 float sunriseTime, sunsetTime, hatsotTime, zmanHourDuration, timeUntilNextHour;
 int zmanHourNumber;
 
+// Sun path
+GPath sun_path;
+GPathInfo sun_path_info = {
+  5,
+  (GPoint []) {
+    {0, 0},
+    {-73, +84}, //replaced by sunrise angle
+    {-73, +84}, //bottom left
+    {+73, +84}, //bottom right
+    {+73, +84}, //replaced by sunset angle
+  }
+};
+
 // Functions declarations (to allow for more readable code!
 void handle_init(AppContextRef ctx);
-void line_layer_update_callback(Layer *me, GContext* ctx);
+void lineLayerUpdate(Layer *me, GContext* ctx);
+void sunGraphLayerUpdate(Layer *me, GContext* ctx);
+
 void handle_minute_tick(AppContextRef ctx, PebbleTickEvent *t);
 void updateWatch();
+
 void doEveryDay();
 void doEveryHour();
 void doEveryMinute();
@@ -68,6 +93,8 @@ void updateDate();
 void updateHebrewDate();
 void updateMoonAndSun();
 void updateZmanim();
+
 void adjustTimezone(float* time);
 int tm2jd(PblTm *time);
 int moon_phase(int jdn);
+float get24HourAngle(int hours, int minutes);
