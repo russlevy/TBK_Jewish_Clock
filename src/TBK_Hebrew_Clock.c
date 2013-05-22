@@ -370,6 +370,8 @@ void updateTime() {
   */
   string_format_time(timeString, sizeof(timeString), timeFormat, &currentPblTime);
   text_layer_set_text(&timeLayer, timeString);
+  // Must update Sun Graph rendering
+  layer_mark_dirty(&sunGraphLayer);
 }
 
 // ******************** Utility functions ****************
