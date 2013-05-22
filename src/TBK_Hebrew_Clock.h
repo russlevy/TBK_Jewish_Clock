@@ -23,41 +23,51 @@ PBL_APP_INFO(MY_UUID,
 Window window;
 AppContextRef appContext;
 
-// Text Layers and associated strings
-TextLayer timeLayer;          char timeString[]=        "00:00";
-TextLayer sunriseLayer;       char sunriseString[]=     "00:00";
-TextLayer sunsetLayer;        char sunsetString[]=      "00:00";
-TextLayer hatsotLayer;        char hatsotString[]=      "00:00";
-TextLayer zmanHourLayer;      char zmanHourString[]=    "Hour #11 - Next in 1:07";
-TextLayer dateLayer;          char dateString[]=        "Wednesday September 31";
-TextLayer hebrewDateLayer;    char hebrewDateString[]=  "17 Cheshvan 5773";
-TextLayer moonLayer;          char moonString[]=        " ";
+// ******************************************
+// Layers - top to bottom, left to right
+// ******************************************
+TextLayer dayLayer;           char dayString[]=           "17";
+TextLayer hDayLayer;          char hDayString[]=          "13";
+TextLayer moonLayer;          char moonString[]=          " ";
+TextLayer monthLayer;         char monthString[]=         "May";
+TextLayer hMonthLayer;        // char hMonthString[]=      "Cheshvan";
 
-// Other Layers
+TextLayer timeLayer;          char timeString[]=          "00:00";
 Layer lineLayer;
+
+TextLayer zmanHourLabelLayer; char zmanHourLabelString[]= "Hour #";
+TextLayer nextHourLabelLayer; char nextHourLabelString[]= "Next In:";
+TextLayer zmanHourLayer;      char zmanHourString[]=      "11";
+TextLayer nextHourLayer;      char nextHourString[]=      "01:07:00";
+
+TextLayer sunriseLayer;       char sunriseString[]=       "00:00";
+TextLayer sunsetLayer;        char sunsetString[]=        "00:00";
+TextLayer hatsotLayer;        char hatsotString[]=        "00:00";
 
 // Keep current time so its available in all functions
 PblTm currentPblTime;
+float currentTime;    // time as a float ( = hour + minutes/60 )
 
 // Format string to use for times (must change according to 24h or 12h option)
 char *timeFormat;
 
 // Zmanim
-float currentTime, sunriseTime, sunsetTime, hatsotTime, zmanHourDuration;
+float sunriseTime, sunsetTime, hatsotTime, zmanHourDuration, timeUntilNextHour;
 int zmanHourNumber;
 
 // Functions declarations (to allow for more readable code!
 void handle_init(AppContextRef ctx);
+void line_layer_update_callback(Layer *me, GContext* ctx);
 void handle_minute_tick(AppContextRef ctx, PebbleTickEvent *t);
 void updateWatch();
-void dayHasChanged();
-void hourHasChanged();
-void minuteHasChanged();
+void doEveryDay();
+void doEveryHour();
+void doEveryMinute();
+void updateTime();
 void updateDate();
 void updateHebrewDate();
-void updateMoon();
+void updateMoonAndSun();
 void updateZmanim();
-void line_layer_update_callback(Layer *me, GContext* ctx);
 void adjustTimezone(float* time);
 int tm2jd(PblTm *time);
 int moon_phase(int jdn);

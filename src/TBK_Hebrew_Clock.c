@@ -31,39 +31,97 @@ void handle_init(AppContextRef ctx) {
   // Init time format string
   timeFormat = clock_is_24h_style()?"%R":"%I:%M";
   
-  // Init the text layer used to show the gregorian date
-  text_layer_init(&dateLayer, GRect(0, 85, 144, 22));
-  text_layer_set_text_color(&dateLayer, GColorWhite);
-  text_layer_set_background_color(&dateLayer, GColorClear);
-  text_layer_set_text_alignment(&dateLayer, GTextAlignmentCenter);
-  text_layer_set_font(&dateLayer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));;
-  layer_add_child(&window.layer, &dateLayer.layer);
+  // ******************************************
+  // Init Layers - top to bottom, left to right
+  // ******************************************
   
-  // Init the text layer used to show the hebrew date
-  text_layer_init(&hebrewDateLayer, GRect(0, 0, 144, 25));
-  text_layer_set_text_color(&hebrewDateLayer, GColorWhite);
-  text_layer_set_background_color(&hebrewDateLayer, GColorClear);
-  text_layer_set_text_alignment(&hebrewDateLayer, GTextAlignmentLeft);
-  text_layer_set_font(&hebrewDateLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_ROBOTO_CONDENSED_21)));
-  layer_add_child(&window.layer, &hebrewDateLayer.layer);
+  // Gregorian Day
+  text_layer_init(&dayLayer, GRect(0, 0, 144, 25));
+  text_layer_set_text_color(&dayLayer, GColorWhite);
+  text_layer_set_background_color(&dayLayer, GColorClear);
+  text_layer_set_text_alignment(&dayLayer, GTextAlignmentLeft);
+  text_layer_set_font(&dayLayer, fonts_get_system_font(FONT_KEY_GOTHIC_24));;
+  layer_add_child(&window.layer, &dayLayer.layer);
   
-  // Init the text layer used to show the time
-  text_layer_init(&timeLayer, GRect(0, 25, 144, 50));
+  // Hebrew Day
+  text_layer_init(&hDayLayer, GRect(0, 0, 144, 25));
+  text_layer_set_text_color(&hDayLayer, GColorWhite);
+  text_layer_set_background_color(&hDayLayer, GColorClear);
+  text_layer_set_text_alignment(&hDayLayer, GTextAlignmentRight);
+  text_layer_set_font(&hDayLayer, fonts_get_system_font(FONT_KEY_GOTHIC_24));;
+  layer_add_child(&window.layer, &hDayLayer.layer);
+  
+  //  Moon phase
+  text_layer_init(&moonLayer, GRect(0, 10, 144, 168-115));
+  text_layer_set_text_color(&moonLayer, GColorWhite);
+  text_layer_set_background_color(&moonLayer, GColorClear);
+  text_layer_set_font(&moonLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MOON_PHASES_SUBSET_30)));
+  text_layer_set_text_alignment(&moonLayer, GTextAlignmentCenter);
+  layer_add_child(&window.layer, &moonLayer.layer);
+  
+  // Gregorian Month
+  text_layer_init(&monthLayer, GRect(0, 25, 144, 15));
+  text_layer_set_text_color(&monthLayer, GColorWhite);
+  text_layer_set_background_color(&monthLayer, GColorClear);
+  text_layer_set_text_alignment(&monthLayer, GTextAlignmentLeft);
+  text_layer_set_font(&monthLayer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));;
+  layer_add_child(&window.layer, &monthLayer.layer);
+  
+  // Hebrew Month
+  text_layer_init(&hMonthLayer, GRect(0, 25, 144, 15));
+  text_layer_set_text_color(&hMonthLayer, GColorWhite);
+  text_layer_set_background_color(&hMonthLayer, GColorClear);
+  text_layer_set_text_alignment(&hMonthLayer, GTextAlignmentRight);
+  text_layer_set_font(&hMonthLayer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));;
+  layer_add_child(&window.layer, &hMonthLayer.layer);
+  
+  //  Time
+  text_layer_init(&timeLayer, GRect(0, 40, 144, 50));
   text_layer_set_text_color(&timeLayer, GColorWhite);
   text_layer_set_text_alignment(&timeLayer, GTextAlignmentCenter);
   text_layer_set_background_color(&timeLayer, GColorClear);
   text_layer_set_font(&timeLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_SUBSET_49)));
   layer_add_child(&window.layer, &timeLayer.layer);
   
-  // Init the text layer used to show the moon phase
-  text_layer_init(&moonLayer, GRect(0, 0, 144 /* width */, 168-115 /* height */));
-  text_layer_set_text_color(&moonLayer, GColorWhite);
-  text_layer_set_background_color(&moonLayer, GColorClear);
-  text_layer_set_font(&moonLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MOON_PHASES_SUBSET_30)));
-  text_layer_set_text_alignment(&moonLayer, GTextAlignmentRight);
-  layer_add_child(&window.layer, &moonLayer.layer);
+  // Line
+  layer_init(&lineLayer, window.layer.frame);
+  lineLayer.update_proc = &line_layer_update_callback;
+  layer_add_child(&window.layer, &lineLayer);
   
-  // Init the text layer used to show the Sunrise hour
+  // Zman hours labels
+  text_layer_init(&zmanHourLabelLayer, GRect(0, 100, 144, 15));
+  text_layer_set_text_color(&zmanHourLabelLayer, GColorWhite);
+  text_layer_set_background_color(&zmanHourLabelLayer, GColorClear);
+  text_layer_set_text_alignment(&zmanHourLabelLayer, GTextAlignmentLeft);
+  text_layer_set_font(&zmanHourLabelLayer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));;
+  layer_add_child(&window.layer, &zmanHourLabelLayer.layer);
+  text_layer_set_text(&zmanHourLabelLayer, zmanHourLabelString);
+  
+  text_layer_init(&nextHourLabelLayer, GRect(0, 100, 144, 15));
+  text_layer_set_text_color(&nextHourLabelLayer, GColorWhite);
+  text_layer_set_background_color(&nextHourLabelLayer, GColorClear);
+  text_layer_set_text_alignment(&nextHourLabelLayer, GTextAlignmentRight);
+  text_layer_set_font(&nextHourLabelLayer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));;
+  layer_add_child(&window.layer, &nextHourLabelLayer.layer);
+  text_layer_set_text(&nextHourLabelLayer, nextHourLabelString);
+  
+  // Zman hour number
+  text_layer_init(&zmanHourLayer, GRect(0, 108, 144, 25));
+  text_layer_set_text_color(&zmanHourLayer, GColorWhite);
+  text_layer_set_background_color(&zmanHourLayer, GColorClear);
+  text_layer_set_text_alignment(&zmanHourLayer, GTextAlignmentLeft);
+  text_layer_set_font(&zmanHourLayer, fonts_get_system_font(FONT_KEY_GOTHIC_24));;
+  layer_add_child(&window.layer, &zmanHourLayer.layer);
+  
+  // Next zman hour
+  text_layer_init(&nextHourLayer, GRect(0, 108, 144, 25));
+  text_layer_set_text_color(&nextHourLayer, GColorWhite);
+  text_layer_set_background_color(&nextHourLayer, GColorClear);
+  text_layer_set_text_alignment(&nextHourLayer, GTextAlignmentRight);
+  text_layer_set_font(&nextHourLayer, fonts_get_system_font(FONT_KEY_GOTHIC_24));;
+  layer_add_child(&window.layer, &nextHourLayer.layer);
+  
+  //  Sunrise hour
   text_layer_init(&sunriseLayer, window.layer.frame);
   text_layer_set_text_color(&sunriseLayer, GColorWhite);
   text_layer_set_background_color(&sunriseLayer, GColorClear);
@@ -72,7 +130,7 @@ void handle_init(AppContextRef ctx) {
   text_layer_set_text_alignment(&sunriseLayer, GTextAlignmentLeft);
   layer_add_child(&window.layer, &sunriseLayer.layer);
   
-  // Init the text layer used to show theHatsot hour
+  // Hatsot hour
   text_layer_init(&hatsotLayer, window.layer.frame);
   text_layer_set_text_color(&hatsotLayer, GColorWhite);
   text_layer_set_background_color(&hatsotLayer, GColorClear);
@@ -81,7 +139,7 @@ void handle_init(AppContextRef ctx) {
   text_layer_set_text_alignment(&hatsotLayer, GTextAlignmentCenter);
   layer_add_child(&window.layer, &hatsotLayer.layer);
   
-  // Init the text layer used to show the Sunset hour
+  //  Sunset hour
   text_layer_init(&sunsetLayer, window.layer.frame);
   text_layer_set_text_color(&sunsetLayer, GColorWhite);
   text_layer_set_background_color(&sunsetLayer, GColorClear);
@@ -90,12 +148,15 @@ void handle_init(AppContextRef ctx) {
   text_layer_set_text_alignment(&sunsetLayer, GTextAlignmentRight);
   layer_add_child(&window.layer, &sunsetLayer.layer);
   
-  // Init line layer
-  layer_init(&lineLayer, window.layer.frame);
-  lineLayer.update_proc = &line_layer_update_callback;
-  layer_add_child(&window.layer, &lineLayer);
-  
   updateWatch();  // update display at startup to avoid empty screen until next tick
+}
+
+// Draw line
+void line_layer_update_callback(Layer *me, GContext* ctx) {
+  (void)me;
+  graphics_context_set_stroke_color(ctx, GColorWhite);
+  graphics_draw_line(ctx, GPoint(0, 97), GPoint(144, 97));
+  graphics_draw_line(ctx, GPoint(0, 98), GPoint(144, 98));
 }
 
 // Handles the system minute-tick, calls appropriate functions below
@@ -116,39 +177,44 @@ void updateWatch() {
   // call update functions as requires, daily first, then hourly, then minute
   if(currentPblTime.tm_yday != currentYDay) {  // Day has changed, or app just started
     currentYDay = currentPblTime.tm_yday;
-    dayHasChanged();
+    doEveryDay();
   }
   if(currentPblTime.tm_hour != currentHour) {  // Hour has changed, or app just started
     currentHour = currentPblTime.tm_hour;
-    hourHasChanged();
+    doEveryHour();
   }
-  minuteHasChanged();
+  doEveryMinute();
 }
 
 // Called once per day at midnight, and once at startup
-void dayHasChanged() {
+void doEveryDay() {
   updateDate();
   updateHebrewDate();
-  updateMoon();
-  updateZmanim();
+  updateMoonAndSun();
 }
 
 // Called once per hour when minute becomes 0, and once at startup
-void hourHasChanged() {
+void doEveryHour() {
   
 }
 
 // Called once per minute, and once at startup
-void minuteHasChanged() {
-  // Display Time
-  string_format_time(timeString, sizeof(timeString), timeFormat, &currentPblTime);
-  text_layer_set_text(&timeLayer, timeString);
+void doEveryMinute() {
+  updateTime();
+  updateZmanim();
 }
+
+// ******************************** Now the real works begins! ******************
+// From least frequent updates to most frequent updates
+// ******************************************************************************
 
 // Update Gregorian Date
 void updateDate() {
-  string_format_time(dateString, sizeof(dateString), "%A %B %e", &currentPblTime);
-  text_layer_set_text(&dateLayer, dateString);
+  static char *monthNames[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+  xsprintf(dayString, "%d", currentPblTime.tm_mday);
+  xsprintf(monthString, "%s", monthNames[currentPblTime.tm_mon]);
+  text_layer_set_text(&dayLayer, dayString);
+  text_layer_set_text(&monthLayer, monthString);
 }
 
 // Update Hebrew Date
@@ -157,15 +223,15 @@ void updateHebrewDate() {
   // Convert julian day to hebrew date
   int hDay, hMonth, hYear, hDayTishrey, hNextTishrey;
   hdate_jd_to_hdate(julianDay, &hDay, &hMonth, &hYear, &hDayTishrey, &hNextTishrey);
-  // Format hebrew date and show
   char *hebrewMonthName = hdate_get_month_string(hMonth);
-  xsprintf(hebrewDateString, "%d %s", hDay, hebrewMonthName);
-//  xsprintf(hebrewDateString, "%d/%d/%d",hDay,hMonth,hYear);
-  text_layer_set_text(&hebrewDateLayer, hebrewDateString);
+  xsprintf(hDayString, "%d",hDay);
+  text_layer_set_text(&hDayLayer, hDayString);
+  text_layer_set_text(&hMonthLayer, hebrewMonthName);
 }
 
-// Update MOON phase
-void updateMoon() {
+// Update MOON phase and Sun info
+void updateMoonAndSun() {
+  // ******************* MOON
   int moonphase_number = moon_phase(tm2jd(&currentPblTime));
   // correct for southern hemisphere
   if ((moonphase_number > 0) && (LATITUDE < 0))
@@ -182,34 +248,17 @@ void updateMoon() {
     moonString[0] = (unsigned char)(moonphase_number+95);
   }
   text_layer_set_text(&moonLayer, moonString);
-}
-
-// Update zmanim
-void updateZmanim() {
-  PblTm pblTime;
+  
+  // ******************* SUN
   sunriseTime = calcSunRise(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
   sunsetTime = calcSunSet(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
 	hatsotTime = (sunriseTime+sunsetTime)/2.0f;
-
-  float zmanTime;
-  if((currentTime >= sunriseTime) && (currentTime <= sunsetTime)) { // Day
-    zmanHourDuration = (sunsetTime - sunriseTime)/12.0;
-    zmanTime = (currentTime-sunriseTime)/zmanHourDuration;
-  } else {  // Night
-    zmanHourDuration = (24.0 - (sunsetTime-sunriseTime))/12.0;
-    if(currentTime < sunriseTime) {
-      zmanTime = (12.0+currentTime-sunsetTime)/zmanHourDuration;
-    } else {
-      zmanTime = (currentTime - sunsetTime)/zmanHourDuration;
-    }
-  }
-  zmanHourNumber = ((int)zmanTime)+1;
-  float timeUntilNext = zmanHourDuration * (1 - (zmanTime - (zmanHourNumber-1)));
   
   adjustTimezone(&sunriseTime);
   adjustTimezone(&sunsetTime);
 	adjustTimezone(&hatsotTime);
   
+  PblTm pblTime;
   pblTime.tm_min = (int)(60*(sunriseTime-((int)(sunriseTime))));
   pblTime.tm_hour = (int)sunriseTime;
   string_format_time(sunriseString, sizeof(sunriseString), timeFormat, &pblTime);
@@ -226,22 +275,48 @@ void updateZmanim() {
   text_layer_set_text(&sunsetLayer, sunsetString);
 }
 
-// Utility functions
-
-// Draw line
-void line_layer_update_callback(Layer *me, GContext* ctx) {
-  (void)me;
-  
-  graphics_context_set_stroke_color(ctx, GColorWhite);
-  
-  graphics_draw_line(ctx, GPoint(0, 82), GPoint(144, 82));
-  graphics_draw_line(ctx, GPoint(0, 83), GPoint(144, 83));
+// Update zmanim
+void updateZmanim() {
+  float zmanTime;
+  int zn;
+  if((currentTime >= sunriseTime) && (currentTime <= sunsetTime)) { // Day
+    zmanHourDuration = (sunsetTime - sunriseTime)/12.0;
+    zmanTime = (currentTime-sunriseTime)/zmanHourDuration;
+    zn = (int) zmanTime;
+    timeUntilNextHour = sunriseTime + (((float)(zn+1))*zmanHourDuration) - currentTime;
+  } else {  // Night
+    zmanHourDuration = (24.0 - (sunsetTime-sunriseTime))/12.0;
+    if(currentTime < sunriseTime) {
+      zmanTime = (12.0+currentTime-sunsetTime)/zmanHourDuration;
+      zn = (int) zmanTime;
+      timeUntilNextHour = sunsetTime + (((float)(zn+1))*zmanHourDuration) - currentTime - 12.0;
+    } else {
+      zmanTime = (currentTime - sunsetTime)/zmanHourDuration;
+      zn = (int) zmanTime;
+      timeUntilNextHour = sunsetTime + (((float)(zn+1))*zmanHourDuration) - currentTime;
+    }
+  }
+  zmanHourNumber = zn+1;  // We start at hour # 1 not 0
+  int nextHour = (int)timeUntilNextHour;
+  int nextMinute = (int)((timeUntilNextHour - ((float)nextHour))*60);
+  xsprintf(zmanHourString, "%d", zmanHourNumber);
+  xsprintf(nextHourString, "%d:%d",nextHour, nextMinute);
+  text_layer_set_text(&zmanHourLayer, zmanHourString);
+  text_layer_set_text(&nextHourLayer, nextHourString);
 }
+
+// Update time
+void updateTime() {
+  string_format_time(timeString, sizeof(timeString), timeFormat, &currentPblTime);
+  text_layer_set_text(&timeLayer, timeString);
+}
+
+// ******************** Utility functions ****************
 
 void adjustTimezone(float* time)
 {
   // ****************** warning tm_idst is not implemented yet, find another way! ********************
-  if (ISDST)
+  if (ISDST)  // Currently using DST flag in config.h
   {
     *time += 1.0;
   }
