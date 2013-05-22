@@ -108,7 +108,7 @@ void handle_init(AppContextRef ctx) {
   text_layer_set_text(&nextHourLabelLayer, nextHourLabelString);
   
   // Sun Graph
-  layer_init(&sunGraphLayer, GRect(72-sunSize/2, sunY, sunSize, sunSize));
+  layer_init(&sunGraphLayer, GRect(72-sunSize/2, sunY, sunSize+2, sunSize+2));
   sunGraphLayer.update_proc = &sunGraphLayerUpdate;
   layer_set_clips(&sunGraphLayer, true);
   layer_add_child(&window.layer, &sunGraphLayer);
@@ -177,7 +177,7 @@ void sunGraphLayerUpdate(Layer *me, GContext* ctx)
   graphics_context_set_fill_color(ctx, GColorBlack);
   graphics_fill_rect(ctx, sunGraphLayer.bounds, 0, GCornersAll);
   
-  // Draw white circle
+  // Draw white filled circle
   graphics_context_set_fill_color(ctx, GColorWhite);
   graphics_fill_circle(ctx, sunCenter, sunSize/2);
   
@@ -186,6 +186,10 @@ void sunGraphLayerUpdate(Layer *me, GContext* ctx)
   gpath_init(&sun_path, &sun_path_info);
   gpath_move_to(&sun_path, sunCenter);
   gpath_draw_filled(ctx, &sun_path);
+  
+  // Draw white circle for nicer look
+//  graphics_context_set_fill_color(ctx, GColorWhite);
+//  graphics_draw_circle(ctx, sunCenter, sunSize/2);
   
   // Draw hand at current time
   // Black if day, white if night

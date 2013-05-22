@@ -43,7 +43,7 @@ TextLayer zmanHourLabelLayer; char zmanHourLabelString[]= "Hour #";
 TextLayer nextHourLabelLayer; char nextHourLabelString[]= "Next In:";
 
 Layer sunGraphLayer;
-const int sunY = 105;
+const int sunY = 104;
 const int sunSize = 38;
 
 TextLayer zmanHourLayer;      char zmanHourString[]=      "11";
