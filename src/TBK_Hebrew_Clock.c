@@ -171,16 +171,32 @@ void lineLayerUpdate(Layer *me, GContext* ctx) {
 void sunGraphLayerUpdate(Layer *me, GContext* ctx)
 {
   (void)me;
+  GPoint sunCenter = GPoint(sunSize/2, sunSize/2);
+  
+  // First fill with black
+  graphics_context_set_fill_color(ctx, GColorBlack);
+  graphics_fill_rect(ctx, sunGraphLayer.bounds, 0, GCornersAll);
+  
   // Draw white circle
   graphics_context_set_fill_color(ctx, GColorWhite);
-  GPoint sunCenter = grect_center_point(&sunGraphLayer.frame);
-  graphics_fill_circle(ctx, GPoint(sunSize/2, sunSize/2), sunSize/2);
+  graphics_fill_circle(ctx, sunCenter, sunSize/2);
   
   // Must fill night part with black
   graphics_context_set_fill_color(ctx, GColorBlack);
   gpath_init(&sun_path, &sun_path_info);
-  gpath_move_to(&sun_path, GPoint(sunSize/2, sunSize/2));
+  gpath_move_to(&sun_path, sunCenter);
   gpath_draw_filled(ctx, &sun_path);
+  
+  // Draw hand at current time
+  // Black if day, white if night
+  if((currentTime >= sunriseTime) && (currentTime <= sunsetTime)) { // Day
+    graphics_context_set_stroke_color(ctx, GColorBlack);
+  } else {  // night
+    graphics_context_set_stroke_color(ctx, GColorWhite);
+  }
+  float angle = (18.0 - currentTime)/24.0 * 2.0 * M_PI;
+  GPoint toPoint = GPoint(sunCenter.x + my_cos(angle)*sunSize/2, sunCenter.y - my_sin(angle)*sunSize/2);
+  graphics_draw_line(ctx, sunCenter, toPoint);
 }
 
 void handle_deinit(AppContextRef ctx) {
@@ -388,8 +404,4 @@ int moon_phase(int jdn)
   return (int)(jd*27 + 0.5); /* scale fraction from 0-27 and round by adding 0.5 */
 }
 
-float get24HourAngle(int hours, int minutes)
-{
-  return (12.0f + hours + (minutes/60.0f)) / 24.0f;
-}
 

@@ -43,8 +43,8 @@ TextLayer zmanHourLabelLayer; char zmanHourLabelString[]= "Hour #";
 TextLayer nextHourLabelLayer; char nextHourLabelString[]= "Next In:";
 
 Layer sunGraphLayer;
-const int sunY = 107;
-const int sunSize = 36;
+const int sunY = 105;
+const int sunSize = 38;
 
 TextLayer zmanHourLayer;      char zmanHourString[]=      "11";
 TextLayer nextHourLayer;      char nextHourString[]=      "01:07:00";
@@ -97,4 +97,4 @@ void updateZmanim();
 void adjustTimezone(float* time);
 int tm2jd(PblTm *time);
 int moon_phase(int jdn);
-float get24HourAngle(int hours, int minutes);
+
