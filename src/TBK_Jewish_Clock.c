@@ -4,7 +4,11 @@
 // Open Source - feel free to use, modify, contribute
 // Attribution and comments welcome
 
-// Parts from KP_Sun_Moon_Vibe_Clock - https://github.com/KarbonPebbler/KP_Sun_Moon_Vibe_Clock
+// Check our iOS apps:
+// https://itunes.apple.com/us/artist/ary-tebeka/id375595955?uo=4
+// https://itunes.apple.com/us/artist/tebeka-software-solutions/id285016307?uo=4
+
+// Parts of this project are from KP_Sun_Moon_Vibe_Clock - https://github.com/KarbonPebbler/KP_Sun_Moon_Vibe_Clock and libhdate - http://libhdate.sourceforge.net
 
 #include "TBK_Jewish_Clock.h"
 
@@ -110,13 +114,6 @@ void sunGraphLayerUpdate(Layer *me, GContext* ctx)
 {
   (void)me;
   GPoint sunCenter = GPoint(sunSize/2, sunSize/2);
-  
-  /*
-  // First fill with black
-  graphics_context_set_fill_color(ctx, GColorBlack);
-  graphics_fill_rect(ctx, sunGraphLayer.bounds, 0, GCornersAll);
-  */
-  
   // Draw white filled circle
   graphics_context_set_fill_color(ctx, GColorWhite);
   graphics_fill_circle(ctx, sunCenter, sunSize/2);
@@ -126,10 +123,6 @@ void sunGraphLayerUpdate(Layer *me, GContext* ctx)
   gpath_init(&sun_path, &sun_path_info);
   gpath_move_to(&sun_path, sunCenter);
   gpath_draw_filled(ctx, &sun_path);
-  
-  // Draw white circle for nicer look
-//  graphics_context_set_fill_color(ctx, GColorWhite);
-//  graphics_draw_circle(ctx, sunCenter, sunSize/2);
   
   // Draw hand/needle at current time
   // Black if day, white if night
@@ -141,10 +134,6 @@ void sunGraphLayerUpdate(Layer *me, GContext* ctx)
   float angle = (18.0 - currentTime)/24.0 * 2.0 * M_PI;
   GPoint toPoint = GPoint(sunCenter.x + my_cos(angle)*sunSize/2, sunCenter.y - my_sin(angle)*sunSize/2);
   graphics_draw_line(ctx, sunCenter, toPoint);
-}
-
-void handle_deinit(AppContextRef ctx) {
-  (void)ctx;
 }
 
 // ************* TICK HANDLER *****************
@@ -193,7 +182,7 @@ void doEveryMinute() {
   updateZmanim();
 }
 
-// ******************************** Now the real works begins! ******************
+// ******************************** Now the real work begins! ******************
 // From least frequent updates to most frequent updates
 // ******************************************************************************
 
@@ -332,7 +321,7 @@ void initTextLayer(TextLayer *theLayer, int x, int y, int w, int h, GColor textC
 
 void adjustTimezone(float* time)
 {
-  // ****************** warning tm_idst is not implemented yet, find another way! ********************
+  // ****************** warning tm_idst is not implemented yet, currently using a compile flag, find another way! ********************
   if (ISDST)  // Currently using DST flag in config.h
   {
     *time += 1.0;

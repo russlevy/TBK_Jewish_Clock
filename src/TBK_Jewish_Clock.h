@@ -4,7 +4,11 @@
 // Open Source - feel free to use, modify, contribute
 // Attribution and comments welcome
 
-// Parts from KP_Sun_Moon_Vibe_Clock - https://github.com/KarbonPebbler/KP_Sun_Moon_Vibe_Clock
+// Check our iOS apps:
+// https://itunes.apple.com/us/artist/ary-tebeka/id375595955?uo=4
+// https://itunes.apple.com/us/artist/tebeka-software-solutions/id285016307?uo=4
+
+// Parts of this project are from KP_Sun_Moon_Vibe_Clock - https://github.com/KarbonPebbler/KP_Sun_Moon_Vibe_Clock and libhdate - http://libhdate.sourceforge.net
 
 #include "pebble_os.h"
 #include "pebble_app.h"
@@ -18,7 +22,7 @@
 // App Configuration
 #define MY_UUID { 0xB6, 0x79, 0x42, 0x92, 0xFA, 0x2C, 0x4B, 0x4B, 0x9A, 0xCC, 0xE8, 0xD6, 0x13, 0x68, 0x57, 0x56 }
 PBL_APP_INFO(MY_UUID,
-             "TBK Jewish Clock", "Ary & Haim Tebeka",
+             "TBK Jewish Clock", "Ary Tebeka",
              1, 0, /* App version */
              RESOURCE_ID_IMAGE_MENU_ICON,
              APP_INFO_WATCH_FACE);
