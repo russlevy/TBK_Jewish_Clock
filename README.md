@@ -1,9 +1,24 @@
-TBK_Hebrew_Clock
+TBK_Jewish_Clock
 ================
 
-Hebrew Watch Face for the Pebble
-
 A Jewish calendar/zmanim watch face for the Pebble
-Copyright (C) 2013 Ary Tebeka contact@arytbk.net
-Open Source - feel free to use, modify, contribute
-Attribution and comments welcome
+
+## Features
+#### Top
+ * Gregorian date
+ * Moon phase
+ * Jewish date
+
+#### Middle
+ * the time
+
+#### Bottom
+ * Number of the zman/jewish hour, and time until next
+ * Sun Graph, showing day/night parts and needle showing now
+ * Sunrise (Netz), MidDay (Hatsot), Sunset (Skhia)
+
+**You must enter your location and timezone in config.h before building the watchface**
+
+Copyright (C) 2013 Ary Tebeka (contact@arytbk.net). Open Source - feel free to use, modify and contribute.
+Attributions and comments are welcome.
+
