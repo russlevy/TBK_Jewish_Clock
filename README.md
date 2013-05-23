@@ -1,5 +1,5 @@
-TBK Jewish Clock
-================
+TBK Jewish Clock for the Pebble Watch
+=====================================
 
 A Jewish calendar/zmanim watch face for the Pebble
 
