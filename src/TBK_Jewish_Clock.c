@@ -1,4 +1,4 @@
-// TBK Hebrew Clock
+// TBK Jewish Clock
 // A Jewish calendar/zmanim watch face for the Pebble
 // Copyright (C) 2013 Ary Tebeka contact@arytbk.net
 // Open Source - feel free to use, modify, contribute
@@ -6,7 +6,7 @@
 
 // Parts from KP_Sun_Moon_Vibe_Clock - https://github.com/KarbonPebbler/KP_Sun_Moon_Vibe_Clock
 
-#include "TBK_Hebrew_Clock.h"
+#include "TBK_Jewish_Clock.h"
 
 // MAIN - starts the app
 void pbl_main(void *params) {
@@ -32,58 +32,35 @@ void handle_init(AppContextRef ctx) {
   
   // Init time format string
   timeFormat = clock_is_24h_style()?"%R":"%I:%M";
+
+  // Define fonts
+  GFont tinyFont = fonts_get_system_font(FONT_KEY_GOTHIC_18);
+  GFont smallFont = fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD);
+  GFont mediumFont = fonts_get_system_font(FONT_KEY_GOTHIC_24);
+  GFont largeFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_SUBSET_49));
+  GFont moonFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MOON_PHASES_SUBSET_30));
   
   // ******************************************
   // Init Layers - top to bottom, left to right
   // ******************************************
   
   // Gregorian Day
-  text_layer_init(&dayLayer, GRect(0, 0, 144, 25));
-  text_layer_set_text_color(&dayLayer, GColorWhite);
-  text_layer_set_background_color(&dayLayer, GColorClear);
-  text_layer_set_text_alignment(&dayLayer, GTextAlignmentLeft);
-  text_layer_set_font(&dayLayer, fonts_get_system_font(FONT_KEY_GOTHIC_24));;
-  layer_add_child(&window.layer, &dayLayer.layer);
-  
+  initTextLayer(&dayLayer, 0, 0, 144, 25, GColorWhite, GColorClear, GTextAlignmentLeft, mediumFont);
+
   // Hebrew Day
-  text_layer_init(&hDayLayer, GRect(0, 0, 144, 25));
-  text_layer_set_text_color(&hDayLayer, GColorWhite);
-  text_layer_set_background_color(&hDayLayer, GColorClear);
-  text_layer_set_text_alignment(&hDayLayer, GTextAlignmentRight);
-  text_layer_set_font(&hDayLayer, fonts_get_system_font(FONT_KEY_GOTHIC_24));;
-  layer_add_child(&window.layer, &hDayLayer.layer);
+  initTextLayer(&hDayLayer, 0, 0, 144, 25, GColorWhite, GColorClear, GTextAlignmentRight, mediumFont);
   
   //  Moon phase
-  text_layer_init(&moonLayer, GRect(0, 10, 144, 168-115));
-  text_layer_set_text_color(&moonLayer, GColorWhite);
-  text_layer_set_background_color(&moonLayer, GColorClear);
-  text_layer_set_font(&moonLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MOON_PHASES_SUBSET_30)));
-  text_layer_set_text_alignment(&moonLayer, GTextAlignmentCenter);
-  layer_add_child(&window.layer, &moonLayer.layer);
+  initTextLayer(&moonLayer, 0, 10, 144, 168-115, GColorWhite, GColorClear, GTextAlignmentCenter, moonFont);
   
   // Gregorian Month
-  text_layer_init(&monthLayer, GRect(0, 25, 144, 15));
-  text_layer_set_text_color(&monthLayer, GColorWhite);
-  text_layer_set_background_color(&monthLayer, GColorClear);
-  text_layer_set_text_alignment(&monthLayer, GTextAlignmentLeft);
-  text_layer_set_font(&monthLayer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));;
-  layer_add_child(&window.layer, &monthLayer.layer);
+  initTextLayer(&monthLayer, 0, 25, 144, 15, GColorWhite, GColorClear, GTextAlignmentLeft, smallFont);
   
   // Hebrew Month
-  text_layer_init(&hMonthLayer, GRect(0, 25, 144, 15));
-  text_layer_set_text_color(&hMonthLayer, GColorWhite);
-  text_layer_set_background_color(&hMonthLayer, GColorClear);
-  text_layer_set_text_alignment(&hMonthLayer, GTextAlignmentRight);
-  text_layer_set_font(&hMonthLayer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));;
-  layer_add_child(&window.layer, &hMonthLayer.layer);
+  initTextLayer(&hMonthLayer, 0, 25, 144, 15, GColorWhite, GColorClear, GTextAlignmentRight, smallFont);
   
   //  Time
-  text_layer_init(&timeLayer, GRect(0, 40, 144, 50));
-  text_layer_set_text_color(&timeLayer, GColorWhite);
-  text_layer_set_text_alignment(&timeLayer, GTextAlignmentCenter);
-  text_layer_set_background_color(&timeLayer, GColorClear);
-  text_layer_set_font(&timeLayer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_SUBSET_49)));
-  layer_add_child(&window.layer, &timeLayer.layer);
+  initTextLayer(&timeLayer, 0, 40, 144, 50, GColorWhite, GColorClear, GTextAlignmentCenter, largeFont);
   
   // Line
   layer_init(&lineLayer, window.layer.frame);
@@ -91,20 +68,9 @@ void handle_init(AppContextRef ctx) {
   layer_add_child(&window.layer, &lineLayer);
   
   // Zman hours labels
-  text_layer_init(&zmanHourLabelLayer, GRect(0, 100, 144, 15));
-  text_layer_set_text_color(&zmanHourLabelLayer, GColorWhite);
-  text_layer_set_background_color(&zmanHourLabelLayer, GColorClear);
-  text_layer_set_text_alignment(&zmanHourLabelLayer, GTextAlignmentLeft);
-  text_layer_set_font(&zmanHourLabelLayer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));;
-  layer_add_child(&window.layer, &zmanHourLabelLayer.layer);
+  initTextLayer(&zmanHourLabelLayer, 0, 100, 144, 15, GColorWhite, GColorClear, GTextAlignmentLeft, smallFont);
   text_layer_set_text(&zmanHourLabelLayer, zmanHourLabelString);
-  
-  text_layer_init(&nextHourLabelLayer, GRect(0, 100, 144, 15));
-  text_layer_set_text_color(&nextHourLabelLayer, GColorWhite);
-  text_layer_set_background_color(&nextHourLabelLayer, GColorClear);
-  text_layer_set_text_alignment(&nextHourLabelLayer, GTextAlignmentRight);
-  text_layer_set_font(&nextHourLabelLayer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));;
-  layer_add_child(&window.layer, &nextHourLabelLayer.layer);
+  initTextLayer(&nextHourLabelLayer, 0, 100, 144, 15, GColorWhite, GColorClear, GTextAlignmentRight, smallFont);
   text_layer_set_text(&nextHourLabelLayer, nextHourLabelString);
   
   // Sun Graph
@@ -114,47 +80,19 @@ void handle_init(AppContextRef ctx) {
   layer_add_child(&window.layer, &sunGraphLayer);
   
   // Zman hour number
-  text_layer_init(&zmanHourLayer, GRect(0, 108, 144, 25));
-  text_layer_set_text_color(&zmanHourLayer, GColorWhite);
-  text_layer_set_background_color(&zmanHourLayer, GColorClear);
-  text_layer_set_text_alignment(&zmanHourLayer, GTextAlignmentLeft);
-  text_layer_set_font(&zmanHourLayer, fonts_get_system_font(FONT_KEY_GOTHIC_24));;
-  layer_add_child(&window.layer, &zmanHourLayer.layer);
+  initTextLayer(&zmanHourLayer, 0, 108, 144, 25, GColorWhite, GColorClear, GTextAlignmentLeft, mediumFont);
   
   // Next zman hour
-  text_layer_init(&nextHourLayer, GRect(0, 108, 144, 25));
-  text_layer_set_text_color(&nextHourLayer, GColorWhite);
-  text_layer_set_background_color(&nextHourLayer, GColorClear);
-  text_layer_set_text_alignment(&nextHourLayer, GTextAlignmentRight);
-  text_layer_set_font(&nextHourLayer, fonts_get_system_font(FONT_KEY_GOTHIC_24));;
-  layer_add_child(&window.layer, &nextHourLayer.layer);
+  initTextLayer(&nextHourLayer, 0, 108, 144, 25, GColorWhite, GColorClear, GTextAlignmentRight, mediumFont);
   
   //  Sunrise hour
-  text_layer_init(&sunriseLayer, window.layer.frame);
-  text_layer_set_text_color(&sunriseLayer, GColorWhite);
-  text_layer_set_background_color(&sunriseLayer, GColorClear);
-  layer_set_frame(&sunriseLayer.layer, GRect(0, 145, 144, 30));
-  text_layer_set_font(&sunriseLayer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
-  text_layer_set_text_alignment(&sunriseLayer, GTextAlignmentLeft);
-  layer_add_child(&window.layer, &sunriseLayer.layer);
+  initTextLayer(&sunriseLayer, 0, 145, 144, 30, GColorWhite, GColorClear, GTextAlignmentLeft, tinyFont);
   
   // Hatsot hour
-  text_layer_init(&hatsotLayer, window.layer.frame);
-  text_layer_set_text_color(&hatsotLayer, GColorWhite);
-  text_layer_set_background_color(&hatsotLayer, GColorClear);
-  layer_set_frame(&hatsotLayer.layer, GRect(0, 145, 144, 30));
-  text_layer_set_font(&hatsotLayer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
-  text_layer_set_text_alignment(&hatsotLayer, GTextAlignmentCenter);
-  layer_add_child(&window.layer, &hatsotLayer.layer);
+  initTextLayer(&hatsotLayer, 0, 145, 144, 30, GColorWhite, GColorClear, GTextAlignmentCenter, tinyFont);
   
   //  Sunset hour
-  text_layer_init(&sunsetLayer, window.layer.frame);
-  text_layer_set_text_color(&sunsetLayer, GColorWhite);
-  text_layer_set_background_color(&sunsetLayer, GColorClear);
-  layer_set_frame(&sunsetLayer.layer, GRect(0, 145, 144, 30));
-  text_layer_set_font(&sunsetLayer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
-  text_layer_set_text_alignment(&sunsetLayer, GTextAlignmentRight);
-  layer_add_child(&window.layer, &sunsetLayer.layer);
+  initTextLayer(&sunsetLayer, 0, 145, 144, 30, GColorWhite, GColorClear, GTextAlignmentRight, tinyFont);
   
   updateWatch();  // update display at startup to avoid empty screen until next tick
 }
@@ -173,9 +111,11 @@ void sunGraphLayerUpdate(Layer *me, GContext* ctx)
   (void)me;
   GPoint sunCenter = GPoint(sunSize/2, sunSize/2);
   
+  /*
   // First fill with black
   graphics_context_set_fill_color(ctx, GColorBlack);
   graphics_fill_rect(ctx, sunGraphLayer.bounds, 0, GCornersAll);
+  */
   
   // Draw white filled circle
   graphics_context_set_fill_color(ctx, GColorWhite);
@@ -191,7 +131,7 @@ void sunGraphLayerUpdate(Layer *me, GContext* ctx)
 //  graphics_context_set_fill_color(ctx, GColorWhite);
 //  graphics_draw_circle(ctx, sunCenter, sunSize/2);
   
-  // Draw hand at current time
+  // Draw hand/needle at current time
   // Black if day, white if night
   if((currentTime >= sunriseTime) && (currentTime <= sunsetTime)) { // Day
     graphics_context_set_stroke_color(ctx, GColorBlack);
@@ -379,6 +319,16 @@ void updateTime() {
 }
 
 // ******************** Utility functions ****************
+
+// Initializes a text layer
+void initTextLayer(TextLayer *theLayer, int x, int y, int w, int h, GColor textColor, GColor backgroundColor, GTextAlignment alignment, GFont theFont) {
+  text_layer_init(theLayer, GRect(x, y, w, h));
+  text_layer_set_text_color(theLayer, textColor);
+  text_layer_set_background_color(theLayer, backgroundColor);
+  text_layer_set_text_alignment(theLayer, alignment);
+  text_layer_set_font(theLayer, theFont);
+  layer_add_child(&window.layer, &theLayer->layer);
+}
 
 void adjustTimezone(float* time)
 {
