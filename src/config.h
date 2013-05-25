@@ -34,7 +34,7 @@
 //#define LATITUDE    (34.036658)
 //#define LONGITUDE 	(-118.336637)
 
-// Enter your timezone here, for example, if you are GMT+2 (Israel), enter 2
+// ******** Enter your timezone here, for example, if you are GMT+2 (Israel), enter 2
 
 // Israel
  #define TIMEZONE (2)
@@ -45,6 +45,15 @@
 // USA West
 //#define TIMEZONE (-8)
 
-// DAYLIGHT SAVING TIME
+// ******** DAYLIGHT SAVING TIME
 // Currently the Pebble SDK does not tell if Daily Saving Time is active, so must set this flag and recompile (yuk!). Use 0 if not-DST, use -1 if DST.
 #define ISDST (-1)
+
+//****************** ZMANIM *****************
+
+// Comment this line to use Hour numbers instead of Zmanim
+// #define USE_ZMANIM
+
+// Comment this line to disable vibration alert before end of Mincha (sunset)
+// If defined, it is the number of minutes before sunset for the alert
+#define MINCHA_ALERT  (18)    // 18 minutes is also good for Shabbat candlelighting alert!

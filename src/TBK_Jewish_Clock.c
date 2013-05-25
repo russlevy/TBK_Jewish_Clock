@@ -41,6 +41,7 @@ void handle_init(AppContextRef ctx) {
   GFont tinyFont = fonts_get_system_font(FONT_KEY_GOTHIC_18);
   GFont smallFont = fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD);
   GFont mediumFont = fonts_get_system_font(FONT_KEY_GOTHIC_24);
+  GFont mediumBoldFont = fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD);
   GFont largeFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_SUBSET_49));
   GFont moonFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MOON_PHASES_SUBSET_30));
   
@@ -82,6 +83,14 @@ void handle_init(AppContextRef ctx) {
   sunGraphLayer.update_proc = &sunGraphLayerUpdate;
   layer_set_clips(&sunGraphLayer, true);
   layer_add_child(&window.layer, &sunGraphLayer);
+  
+  // Optional Mincha alert message
+#ifdef MINCHA_ALERT
+  initTextLayer(&minchaAlertLayer, 0, 102, 144, 36, GColorBlack, GColorWhite, GTextAlignmentCenter, mediumBoldFont);
+  layer_remove_from_parent(&minchaAlertLayer.layer);  // don't show now!
+  xsprintf(minchaAlertString, "SUNSET-%dmn", MINCHA_ALERT);
+  text_layer_set_text(&minchaAlertLayer, minchaAlertString);
+#endif
   
   // Zman hour number
   initTextLayer(&zmanHourLayer, 0, 108, 144, 25, GColorWhite, GColorClear, GTextAlignmentLeft, mediumFont);
@@ -180,6 +189,9 @@ void doEveryHour() {
 void doEveryMinute() {
   updateTime();
   updateZmanim();
+#ifdef MINCHA_ALERT
+  checkAlerts();
+#endif
 }
 
 // ******************************** Now the real work begins! ******************
@@ -290,6 +302,25 @@ void updateZmanim() {
   text_layer_set_text(&zmanHourLayer, zmanHourString);
   text_layer_set_text(&nextHourLayer, nextHourString);
 }
+
+// **** Check if alert needed and show/vibrate if needed
+#ifdef MINCHA_ALERT
+void checkAlerts() {
+  static int mustRemove=0;
+  float alertTime = sunsetTime - (MINCHA_ALERT / 60.0);
+  // alertTime = 13.4;
+  if((currentTime >=alertTime) && currentTime < (alertTime+(0.5/60.0))) { // this is the minute for the alert
+    layer_add_child(&window.layer, &minchaAlertLayer.layer);  // show message
+    vibes_enqueue_custom_pattern(alertPattern);  // Vibrate
+    mustRemove=1;
+  } else {
+    if(mustRemove) {
+      layer_remove_from_parent(&minchaAlertLayer.layer);
+      mustRemove=0;
+    }
+  }
+}
+#endif
 
 // Update time
 void updateTime() {
