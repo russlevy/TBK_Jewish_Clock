@@ -72,14 +72,19 @@ TextLayer hatsotLayer;        char hatsotString[]=        "00:00";
 
 // Keep current time so its available in all functions
 PblTm currentPblTime;
-float currentTime;    // time as a float ( = hour + minutes/60 )
+//float currentTime;    // time as a float ( = hour + minutes/60 )
+int currentTime;
 
 // Format string to use for times (must change according to 24h or 12h option)
 char *timeFormat;
 
-// Zmanim
-float sunriseTime, sunsetTime, hatsotTime, zmanHourDuration, timeUntilNextHour;
+// Zmanim as minutes from midnight
+//float sunriseTime, sunsetTime, hatsotTime, zmanHourDuration, timeUntilNextHour;
+int sunriseTime, sunsetTime, hatsotTime, timeUntilNextHour;
+// current zman hour number
 int zmanHourNumber;
+// zman hour duration
+float zmanHourDuration;
 
 // Sun path
 GPath sun_path;
@@ -113,7 +118,11 @@ void updateZmanim();
 void checkAlerts();
 
 void initTextLayer(TextLayer *theLayer, int x, int y, int w, int h, GColor textColor, GColor backgroundColor, GTextAlignment alignment, GFont theFont);
-void adjustTimezone(float* time);
+void adjustTimezone(int* time);
 int tm2jd(PblTm *time);
 int moon_phase(int jdn);
+int timeAsMinutes(float theTime);
+float timeAsHours(int theTime);
+void displayTime(int theTime, TextLayer *theLayer, char *theString, int maxSize);
+
 

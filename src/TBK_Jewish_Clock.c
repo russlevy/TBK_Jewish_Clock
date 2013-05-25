@@ -140,7 +140,7 @@ void sunGraphLayerUpdate(Layer *me, GContext* ctx)
   } else {  // night
     graphics_context_set_stroke_color(ctx, GColorWhite);
   }
-  float angle = (18.0 - currentTime)/24.0 * 2.0 * M_PI;
+  float angle = (18*60 - currentTime)/24.0 * 2.0 * M_PI;
   GPoint toPoint = GPoint(sunCenter.x + my_cos(angle)*sunSize/2, sunCenter.y - my_sin(angle)*sunSize/2);
   graphics_draw_line(ctx, sunCenter, toPoint);
 }
@@ -159,7 +159,7 @@ void updateWatch() {
   static int currentHour = -1;
   
   get_time(&currentPblTime);
-  currentTime = ((float)currentPblTime.tm_hour) + ((float)currentPblTime.tm_min)/60.0;
+  currentTime = (currentPblTime.tm_hour * 60) + currentPblTime.tm_min;
   
   // call update functions as requires, daily first, then hourly, then minute
   if(currentPblTime.tm_yday != currentYDay) {  // Day has changed, or app just started
@@ -189,6 +189,8 @@ void doEveryHour() {
 void doEveryMinute() {
   updateTime();
   updateZmanim();
+  // Must update Sun Graph rendering
+  layer_mark_dirty(&sunGraphLayer);
 #ifdef MINCHA_ALERT
   checkAlerts();
 #endif
@@ -240,63 +242,51 @@ void updateMoonAndSun() {
   text_layer_set_text(&moonLayer, moonString);
   
   // ******************* SUN TIMES
-  sunriseTime = calcSunRise(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
-  sunsetTime = calcSunSet(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f);
-	hatsotTime = (sunriseTime+sunsetTime)/2.0f;
+  sunriseTime = timeAsMinutes(calcSunRise(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f));
+  sunsetTime = timeAsMinutes(calcSunSet(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f));
+	hatsotTime = (sunriseTime+sunsetTime)/2;
   
   adjustTimezone(&sunriseTime);
   adjustTimezone(&sunsetTime);
 	adjustTimezone(&hatsotTime);
   
-  PblTm pblTime;
-  pblTime.tm_min = (int)(60*(sunriseTime-((int)(sunriseTime))));
-  pblTime.tm_hour = (int)sunriseTime;
-  string_format_time(sunriseString, sizeof(sunriseString), timeFormat, &pblTime);
-  text_layer_set_text(&sunriseLayer, sunriseString);
-  
-  pblTime.tm_min = (int)(60*(hatsotTime-((int)(hatsotTime))));
-  pblTime.tm_hour = (int)hatsotTime;
-  string_format_time(hatsotString, sizeof(hatsotString), timeFormat, &pblTime);
-  text_layer_set_text(&hatsotLayer, hatsotString);
-  
-  pblTime.tm_min = (int)(60*(sunsetTime-((int)(sunsetTime))));
-  pblTime.tm_hour = (int)sunsetTime;
-  string_format_time(sunsetString, sizeof(sunsetString), timeFormat, &pblTime);
-  text_layer_set_text(&sunsetLayer, sunsetString);
+  displayTime(sunriseTime, &sunriseLayer, sunriseString, sizeof(sunriseString));
+  displayTime(hatsotTime, &hatsotLayer, hatsotString, sizeof(hatsotString));
+  displayTime(sunsetTime, &sunsetLayer, sunsetString, sizeof(sunsetString));
   
   // SUN GRAPHIC
-  float rise2 = sunriseTime+12.0f;
+  float rise2 = timeAsHours(sunriseTime)+12.0f;
   sun_path_info.points[1].x = (int16_t)(my_sin(rise2/24 * M_PI * 2) * 120);
   sun_path_info.points[1].y = -(int16_t)(my_cos(rise2/24 * M_PI * 2) * 120);
-  float set2 =   sunsetTime+12.0f;
+  float set2 =  timeAsHours(sunsetTime)+12.0f;
   sun_path_info.points[4].x = (int16_t)(my_sin(set2/24 * M_PI * 2) * 120);
   sun_path_info.points[4].y = -(int16_t)(my_cos(set2/24 * M_PI * 2) * 120);
 }
 
 // Update zmanim
 void updateZmanim() {
-  float zmanTime;
-  int zn;
+  zmanHourDuration = (timeAsHours(sunsetTime) - timeAsHours(sunriseTime)) / 12.0; // in hours
   if((currentTime >= sunriseTime) && (currentTime <= sunsetTime)) { // Day
-    zmanHourDuration = (sunsetTime - sunriseTime)/12.0;
-    zmanTime = (currentTime-sunriseTime)/zmanHourDuration;
-    zn = (int) zmanTime;
-    timeUntilNextHour = sunriseTime + (((float)(zn+1))*zmanHourDuration) - currentTime;
+    float zh = ((float)(currentTime-sunriseTime))/60.0/zmanHourDuration;
+    zmanHourNumber = (int)zh;
+    float hoursUntilNext = ((float)(zmanHourNumber+1))*zmanHourDuration;
+    timeUntilNextHour = sunriseTime + ((int)(hoursUntilNext * 60.0)) - currentTime;
   } else {  // Night
-    zmanHourDuration = (24.0 - (sunsetTime-sunriseTime))/12.0;
-    if(currentTime < sunriseTime) {
-      zmanTime = (12.0+currentTime-sunsetTime)/zmanHourDuration;
-      zn = (int) zmanTime;
-      timeUntilNextHour = sunsetTime + (((float)(zn+1))*zmanHourDuration) - currentTime - 12.0;
+    zmanHourDuration = 2.0 - zmanHourDuration;  // Night hours;
+    int cTime;
+    if(currentTime > sunsetTime) {
+      cTime = currentTime;
     } else {
-      zmanTime = (currentTime - sunsetTime)/zmanHourDuration;
-      zn = (int) zmanTime;
-      timeUntilNextHour = sunsetTime + (((float)(zn+1))*zmanHourDuration) - currentTime;
+      cTime = currentTime + 24*60;  // past midnight, add 24 hours
     }
+    float zh = ((float)(cTime-sunsetTime))/60.0/zmanHourDuration;
+    zmanHourNumber = (int)zh;
+    float hoursUntilNext = ((float)(zmanHourNumber+1))*zmanHourDuration;
+    timeUntilNextHour = sunsetTime + ((int)(hoursUntilNext * 60.0)) - cTime;
   }
-  zmanHourNumber = zn+1;  // We start at hour # 1 not 0
-  int nextHour = (int)timeUntilNextHour;
-  int nextMinute = (int)((timeUntilNextHour - ((float)nextHour))*60);
+  zmanHourNumber++;  // We start at hour # 1 not 0
+  int nextHour = timeUntilNextHour / 60;
+  int nextMinute = timeUntilNextHour % 60;
   xsprintf(zmanHourString, "%d", zmanHourNumber);
   xsprintf(nextHourString, "%d:%02d",nextHour, nextMinute);
   text_layer_set_text(&zmanHourLayer, zmanHourString);
@@ -307,9 +297,7 @@ void updateZmanim() {
 #ifdef MINCHA_ALERT
 void checkAlerts() {
   static int mustRemove=0;
-  float alertTime = sunsetTime - (MINCHA_ALERT / 60.0);
-  // alertTime = 13.4;
-  if((currentTime >=alertTime) && currentTime < (alertTime+(0.5/60.0))) { // this is the minute for the alert
+  if(currentTime == (sunsetTime - MINCHA_ALERT)) { // this is the minute for the alert
     layer_add_child(&window.layer, &minchaAlertLayer.layer);  // show message
     vibes_enqueue_custom_pattern(alertPattern);  // Vibrate
     mustRemove=1;
@@ -324,18 +312,7 @@ void checkAlerts() {
 
 // Update time
 void updateTime() {
-  /*
-  char time_text[]="00:00";
-  string_format_time(time_text, sizeof(time_text), timeFormat, &currentPblTime);
-  if (!clock_is_24h_style() && (time_text[0] == '0'))
-  {
-    memmove(time_text, &time_text[1], sizeof(time_text) - 1);
-  }
-  */
-  string_format_time(timeString, sizeof(timeString), timeFormat, &currentPblTime);
-  text_layer_set_text(&timeLayer, timeString);
-  // Must update Sun Graph rendering
-  layer_mark_dirty(&sunGraphLayer);
+  displayTime(currentTime, &timeLayer, timeString, sizeof(timeString));
 }
 
 // ******************** Utility functions ****************
@@ -350,16 +327,16 @@ void initTextLayer(TextLayer *theLayer, int x, int y, int w, int h, GColor textC
   layer_add_child(&window.layer, &theLayer->layer);
 }
 
-void adjustTimezone(float* time)
+void adjustTimezone(int* time)  // time as minutes since midnight
 {
   // ****************** warning tm_idst is not implemented yet, currently using a compile flag, find another way! ********************
   if (ISDST)  // Currently using DST flag in config.h
   {
-    *time += 1.0;
+    *time += 60;
   }
-  *time += TIMEZONE;
-  if (*time > 24) *time -= 24;
-  if (*time < 0) *time += 24;
+  *time += (TIMEZONE*60);
+  if (*time >= (24*60)) *time -= (24*60);
+  if (*time < 0) *time += (24*60);
 }
 
 //return julian day number for time
@@ -380,4 +357,22 @@ int moon_phase(int jdn)
   return (int)(jd*27 + 0.5); /* scale fraction from 0-27 and round by adding 0.5 */
 }
 
+int timeAsMinutes(float theTime) {
+  int hours = (int)theTime;
+  int minutes = (int)((theTime - hours)*60.0);
+  return (hours * 60) + minutes;
+}
 
+float timeAsHours(int theTime) {
+  float hours = (float)(theTime / 60);
+  float minutes = (float)(theTime % 60);
+  return hours + (minutes / 60.0);
+}
+
+void displayTime(int theTime, TextLayer *theLayer, char *theString, int maxSize){
+  PblTm thePblTime;
+  thePblTime.tm_hour = theTime / 60;
+  thePblTime.tm_min = theTime % 60;
+  string_format_time(theString, maxSize, timeFormat, &thePblTime);
+  text_layer_set_text(theLayer, theString);
+}
