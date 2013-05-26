@@ -58,13 +58,11 @@ TextLayer zmanHourLayer;      char zmanHourString[]=      "11";
 TextLayer nextHourLayer;      char nextHourString[]=      "01:07:00";
 #endif
 
-#ifdef MINCHA_ALERT
-TextLayer minchaAlertLayer;   char minchaAlertString[]=    "SUNSET IN 000mn";
+TextLayer alertLayer;   char alertString[]=    "SUNSET IN 000mn";
 const VibePattern alertPattern = {
   .durations = (uint32_t []) {200, 100, 200, 100, 200},
   .num_segments = 5
 };
-#endif
 
 TextLayer sunriseLayer;       char sunriseString[]=       "00:00";
 TextLayer sunsetLayer;        char sunsetString[]=        "00:00";

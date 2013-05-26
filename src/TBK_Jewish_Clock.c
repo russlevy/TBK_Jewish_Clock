@@ -84,13 +84,9 @@ void handle_init(AppContextRef ctx) {
   layer_set_clips(&sunGraphLayer, true);
   layer_add_child(&window.layer, &sunGraphLayer);
   
-  // Optional Mincha alert message
-#ifdef MINCHA_ALERT
-  initTextLayer(&minchaAlertLayer, 0, 102, 144, 36, GColorBlack, GColorWhite, GTextAlignmentCenter, mediumBoldFont);
-  layer_remove_from_parent(&minchaAlertLayer.layer);  // don't show now!
-  xsprintf(minchaAlertString, "SUNSET-%dmn", MINCHA_ALERT);
-  text_layer_set_text(&minchaAlertLayer, minchaAlertString);
-#endif
+  // Optional Alert message
+  initTextLayer(&alertLayer, 0, 102, 144, 36, GColorBlack, GColorWhite, GTextAlignmentCenter, mediumBoldFont);
+  layer_remove_from_parent(&alertLayer.layer);  // don't show now!
   
   // Zman hour number
   initTextLayer(&zmanHourLayer, 0, 108, 144, 25, GColorWhite, GColorClear, GTextAlignmentLeft, mediumFont);
@@ -191,9 +187,7 @@ void doEveryMinute() {
   updateZmanim();
   // Must update Sun Graph rendering
   layer_mark_dirty(&sunGraphLayer);
-#ifdef MINCHA_ALERT
   checkAlerts();
-#endif
 }
 
 // ******************************** Now the real work begins! ******************
@@ -287,21 +281,45 @@ void updateZmanim() {
 }
 
 // **** Check if alert needed and show/vibrate if needed
-#ifdef MINCHA_ALERT
 void checkAlerts() {
-  static int mustRemove=0;
+  static int mustRemove = 0;
+  int mustAlert = 0;
+  
+  if(mustRemove) {
+    layer_remove_from_parent(&alertLayer.layer);
+    mustRemove=0;
+  }
+
+#ifdef MINCHA_GEDOLA_ALERT
+  if(currentTime == (hatsotTime + ((int)(zmanHourDuration*60.0*0.5)))) {  // half an hour after midday
+    mustAlert = -1;
+    xsprintf(alertString, "MINCHA-G", MINCHA_ALERT);
+  }
+#endif
+
+  
+#ifdef MINCHA_KETANA_ALERT
+  if(currentTime == (sunsetTime - ((int)(zmanHourDuration*60.0*2.5)))) {  // 2,5 hours before sunset
+    mustAlert = -1;
+    xsprintf(alertString, "MINCHA-K", MINCHA_ALERT);
+  }
+#endif
+
+#ifdef MINCHA_ALERT
   if(currentTime == (sunsetTime - MINCHA_ALERT)) { // this is the minute for the alert
-    layer_add_child(&window.layer, &minchaAlertLayer.layer);  // show message
+    mustAlert = -1;
+    xsprintf(alertString, "SUNSET-%dmn", MINCHA_ALERT);
+  }
+#endif
+
+  if(mustAlert) {
+    mustAlert = -1;
+    text_layer_set_text(&alertLayer, alertString);
+    layer_add_child(&window.layer, &alertLayer.layer);  // show message
     vibes_enqueue_custom_pattern(alertPattern);  // Vibrate
-    mustRemove=1;
-  } else {
-    if(mustRemove) {
-      layer_remove_from_parent(&minchaAlertLayer.layer);
-      mustRemove=0;
-    }
+    mustRemove=-1;
   }
 }
-#endif
 
 // Update time
 void updateTime() {
