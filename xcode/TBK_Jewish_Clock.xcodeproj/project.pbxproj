@@ -6,1176 +6,747 @@
 	objectVersion = 46;
 	objects = {
 
-	000027100000000562001004 = {
-		isa = PBXGroup;
-		path = "out";
-		sourceTree = "<group>";
-		children = (
-		);
-		name = "out";
-	};
+/* Begin PBXBuildFile section */
+		000027100000000562001099 /* hebrewdate.c in Sources */ = {isa = PBXBuildFile; fileRef = 000027100000000562001070 /* hebrewdate.c */; };
+		000027100000000562001100 /* my_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 000027100000000562001072 /* my_math.c */; };
+		000027100000000562001101 /* suncalc.c in Sources */ = {isa = PBXBuildFile; fileRef = 000027100000000562001074 /* suncalc.c */; };
+		000027100000000562001102 /* TBK_Jewish_Clock.c in Sources */ = {isa = PBXBuildFile; fileRef = 000027100000000562001076 /* TBK_Jewish_Clock.c */; };
+		000027100000000562001103 /* xprintf.c in Sources */ = {isa = PBXBuildFile; fileRef = 000027100000000562001078 /* xprintf.c */; };
+/* End PBXBuildFile section */
 
-	000027100000000562001048 = {
-		isa = PBXFileReference;
-		name = "pebble_app.h";
-		fileEncoding = 4;
-		path = "pebble_app.h";
-		lastKnownFileType = "sourcecode.c.h";
-		sourceTree = "<group>";
-	};
+/* Begin PBXFileReference section */
+		000027100000000562001048 /* pebble_app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pebble_app.h; sourceTree = "<group>"; };
+		000027100000000562001049 /* pebble_app_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pebble_app_info.h; sourceTree = "<group>"; };
+		000027100000000562001050 /* pebble_fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pebble_fonts.h; sourceTree = "<group>"; };
+		000027100000000562001051 /* pebble_os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pebble_os.h; sourceTree = "<group>"; };
+		000027100000000562001053 /* libpebble.a */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libpebble.a; sourceTree = "<group>"; };
+		000027100000000562001054 /* pebble_app.ld */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pebble_app.ld; sourceTree = "<group>"; };
+		000027100000000562001055 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		000027100000000562001059 /* Google Android License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Google Android License.txt"; sourceTree = "<group>"; };
+		000027100000000562001060 /* moon_phases.ttf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = moon_phases.ttf; sourceTree = "<group>"; };
+		000027100000000562001061 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		000027100000000562001062 /* Roboto-Condensed.ttf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Roboto-Condensed.ttf"; sourceTree = "<group>"; };
+		000027100000000562001064 /* menu_icon_hebrewwatch.png */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = menu_icon_hebrewwatch.png; sourceTree = "<group>"; };
+		000027100000000562001065 /* resource_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resource_map.json; sourceTree = "<group>"; };
+		000027100000000562001066 /* wscript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wscript; sourceTree = "<group>"; };
+		000027100000000562001069 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		000027100000000562001070 /* hebrewdate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hebrewdate.c; sourceTree = "<group>"; };
+		000027100000000562001071 /* hebrewdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hebrewdate.h; sourceTree = "<group>"; };
+		000027100000000562001072 /* my_math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = my_math.c; sourceTree = "<group>"; };
+		000027100000000562001073 /* my_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = my_math.h; sourceTree = "<group>"; };
+		000027100000000562001074 /* suncalc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = suncalc.c; sourceTree = "<group>"; };
+		000027100000000562001075 /* suncalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = suncalc.h; sourceTree = "<group>"; };
+		000027100000000562001076 /* TBK_Jewish_Clock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TBK_Jewish_Clock.c; sourceTree = "<group>"; };
+		000027100000000562001077 /* TBK_Jewish_Clock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBK_Jewish_Clock.h; sourceTree = "<group>"; };
+		000027100000000562001078 /* xprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xprintf.c; sourceTree = "<group>"; };
+		000027100000000562001079 /* xprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xprintf.h; sourceTree = "<group>"; };
+		000027100000000562001081 /* bitmapgen.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bitmapgen.py; sourceTree = "<group>"; };
+		000027100000000562001083 /* __init__.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = __init__.py; sourceTree = "<group>"; };
+		000027100000000562001084 /* fontgen.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fontgen.py; sourceTree = "<group>"; };
+		000027100000000562001085 /* generate_resource_code.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = generate_resource_code.py; sourceTree = "<group>"; };
+		000027100000000562001086 /* mkbundle.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mkbundle.py; sourceTree = "<group>"; };
+		000027100000000562001087 /* pbpack_meta_data.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pbpack_meta_data.py; sourceTree = "<group>"; };
+		000027100000000562001088 /* stm32_crc.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stm32_crc.py; sourceTree = "<group>"; };
+		000027100000000562001089 /* stm32_crc.pyc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stm32_crc.pyc; sourceTree = "<group>"; };
+		000027100000000562001090 /* waf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waf; sourceTree = "<group>"; };
+		000027100000000562001091 /* wscript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wscript; sourceTree = "<group>"; };
+		000027100000000562001093 /* waf-xcode.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "waf-xcode.sh"; sourceTree = "<group>"; };
+		424D77E517522A8900E273A4 /* index_dummy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = index_dummy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		424D77E717522A8900E273A4 /* clar_tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = clar_tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
 
-	000027100000000562001049 = {
-		isa = PBXFileReference;
-		name = "pebble_app_info.h";
-		fileEncoding = 4;
-		path = "pebble_app_info.h";
-		lastKnownFileType = "sourcecode.c.h";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001050 = {
-		isa = PBXFileReference;
-		name = "pebble_fonts.h";
-		fileEncoding = 4;
-		path = "pebble_fonts.h";
-		lastKnownFileType = "sourcecode.c.h";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001051 = {
-		isa = PBXFileReference;
-		name = "pebble_os.h";
-		fileEncoding = 4;
-		path = "pebble_os.h";
-		lastKnownFileType = "sourcecode.c.h";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001047 = {
-		isa = PBXGroup;
-		path = "include";
-		sourceTree = "<group>";
-		children = (
-			000027100000000562001048,
-			000027100000000562001049,
-			000027100000000562001050,
-			000027100000000562001051,
-		);
-		name = "include";
-	};
-
-	000027100000000562001053 = {
-		isa = PBXFileReference;
-		name = "libpebble.a";
-		fileEncoding = 4;
-		path = "libpebble.a";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001052 = {
-		isa = PBXGroup;
-		path = "lib";
-		sourceTree = "<group>";
-		children = (
-			000027100000000562001053,
-		);
-		name = "lib";
-	};
-
-	000027100000000562001054 = {
-		isa = PBXFileReference;
-		name = "pebble_app.ld";
-		fileEncoding = 4;
-		path = "pebble_app.ld";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001055 = {
-		isa = PBXFileReference;
-		name = "README.md";
-		fileEncoding = 4;
-		path = "README.md";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001059 = {
-		isa = PBXFileReference;
-		name = "Google Android License.txt";
-		fileEncoding = 4;
-		path = "Google Android License.txt";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001060 = {
-		isa = PBXFileReference;
-		name = "moon_phases.ttf";
-		fileEncoding = 4;
-		path = "moon_phases.ttf";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001061 = {
-		isa = PBXFileReference;
-		name = "Roboto-Bold.ttf";
-		fileEncoding = 4;
-		path = "Roboto-Bold.ttf";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001062 = {
-		isa = PBXFileReference;
-		name = "Roboto-Condensed.ttf";
-		fileEncoding = 4;
-		path = "Roboto-Condensed.ttf";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001058 = {
-		isa = PBXGroup;
-		path = "fonts";
-		sourceTree = "<group>";
-		children = (
-			000027100000000562001059,
-			000027100000000562001060,
-			000027100000000562001061,
-			000027100000000562001062,
-		);
-		name = "fonts";
-	};
-
-	000027100000000562001064 = {
-		isa = PBXFileReference;
-		name = "menu_icon_hebrewwatch.png";
-		fileEncoding = 4;
-		path = "menu_icon_hebrewwatch.png";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001063 = {
-		isa = PBXGroup;
-		path = "images";
-		sourceTree = "<group>";
-		children = (
-			000027100000000562001064,
-		);
-		name = "images";
-	};
-
-	000027100000000562001065 = {
-		isa = PBXFileReference;
-		name = "resource_map.json";
-		fileEncoding = 4;
-		path = "resource_map.json";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001057 = {
-		isa = PBXGroup;
-		path = "src";
-		sourceTree = "<group>";
-		children = (
-			000027100000000562001058,
-			000027100000000562001063,
-			000027100000000562001065,
-		);
-		name = "src";
-	};
-
-	000027100000000562001066 = {
-		isa = PBXFileReference;
-		name = "wscript";
-		fileEncoding = 4;
-		path = "wscript";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001056 = {
-		isa = PBXGroup;
-		path = "resources";
-		sourceTree = "<group>";
-		children = (
-			000027100000000562001057,
-			000027100000000562001066,
-		);
-		name = "resources";
-	};
-
-	000027100000000562001067 = {
-		isa = PBXFileReference;
-		name = "Screenshot.psd";
-		fileEncoding = 4;
-		path = "Screenshot.psd";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001069 = {
-		isa = PBXFileReference;
-		name = "config.h";
-		fileEncoding = 4;
-		path = "config.h";
-		lastKnownFileType = "sourcecode.c.h";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001070 = {
-		isa = PBXFileReference;
-		name = "hebrewdate.c";
-		fileEncoding = 4;
-		path = "hebrewdate.c";
-		lastKnownFileType = "sourcecode.c.c";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001071 = {
-		isa = PBXFileReference;
-		name = "hebrewdate.h";
-		fileEncoding = 4;
-		path = "hebrewdate.h";
-		lastKnownFileType = "sourcecode.c.h";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001072 = {
-		isa = PBXFileReference;
-		name = "my_math.c";
-		fileEncoding = 4;
-		path = "my_math.c";
-		lastKnownFileType = "sourcecode.c.c";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001073 = {
-		isa = PBXFileReference;
-		name = "my_math.h";
-		fileEncoding = 4;
-		path = "my_math.h";
-		lastKnownFileType = "sourcecode.c.h";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001074 = {
-		isa = PBXFileReference;
-		name = "suncalc.c";
-		fileEncoding = 4;
-		path = "suncalc.c";
-		lastKnownFileType = "sourcecode.c.c";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001075 = {
-		isa = PBXFileReference;
-		name = "suncalc.h";
-		fileEncoding = 4;
-		path = "suncalc.h";
-		lastKnownFileType = "sourcecode.c.h";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001076 = {
-		isa = PBXFileReference;
-		name = "TBK_Jewish_Clock.c";
-		fileEncoding = 4;
-		path = "TBK_Jewish_Clock.c";
-		lastKnownFileType = "sourcecode.c.c";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001077 = {
-		isa = PBXFileReference;
-		name = "TBK_Jewish_Clock.h";
-		fileEncoding = 4;
-		path = "TBK_Jewish_Clock.h";
-		lastKnownFileType = "sourcecode.c.h";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001078 = {
-		isa = PBXFileReference;
-		name = "xprintf.c";
-		fileEncoding = 4;
-		path = "xprintf.c";
-		lastKnownFileType = "sourcecode.c.c";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001079 = {
-		isa = PBXFileReference;
-		name = "xprintf.h";
-		fileEncoding = 4;
-		path = "xprintf.h";
-		lastKnownFileType = "sourcecode.c.h";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001068 = {
-		isa = PBXGroup;
-		path = "src";
-		sourceTree = "<group>";
-		children = (
-			000027100000000562001069,
-			000027100000000562001070,
-			000027100000000562001071,
-			000027100000000562001072,
-			000027100000000562001073,
-			000027100000000562001074,
-			000027100000000562001075,
-			000027100000000562001076,
-			000027100000000562001077,
-			000027100000000562001078,
-			000027100000000562001079,
-		);
-		name = "src";
-	};
-
-	000027100000000562001081 = {
-		isa = PBXFileReference;
-		name = "bitmapgen.py";
-		fileEncoding = 4;
-		path = "bitmapgen.py";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001083 = {
-		isa = PBXFileReference;
-		name = "__init__.py";
-		fileEncoding = 4;
-		path = "__init__.py";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001084 = {
-		isa = PBXFileReference;
-		name = "fontgen.py";
-		fileEncoding = 4;
-		path = "fontgen.py";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001082 = {
-		isa = PBXGroup;
-		path = "font";
-		sourceTree = "<group>";
-		children = (
-			000027100000000562001083,
-			000027100000000562001084,
-		);
-		name = "font";
-	};
-
-	000027100000000562001085 = {
-		isa = PBXFileReference;
-		name = "generate_resource_code.py";
-		fileEncoding = 4;
-		path = "generate_resource_code.py";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001086 = {
-		isa = PBXFileReference;
-		name = "mkbundle.py";
-		fileEncoding = 4;
-		path = "mkbundle.py";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001087 = {
-		isa = PBXFileReference;
-		name = "pbpack_meta_data.py";
-		fileEncoding = 4;
-		path = "pbpack_meta_data.py";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001088 = {
-		isa = PBXFileReference;
-		name = "stm32_crc.py";
-		fileEncoding = 4;
-		path = "stm32_crc.py";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001089 = {
-		isa = PBXFileReference;
-		name = "stm32_crc.pyc";
-		fileEncoding = 4;
-		path = "stm32_crc.pyc";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001080 = {
-		isa = PBXGroup;
-		path = "tools";
-		sourceTree = "<group>";
-		children = (
-			000027100000000562001081,
-			000027100000000562001082,
-			000027100000000562001085,
-			000027100000000562001086,
-			000027100000000562001087,
-			000027100000000562001088,
-			000027100000000562001089,
-		);
-		name = "tools";
-	};
-
-	000027100000000562001090 = {
-		isa = PBXFileReference;
-		name = "waf";
-		fileEncoding = 4;
-		path = "waf";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001091 = {
-		isa = PBXFileReference;
-		name = "wscript";
-		fileEncoding = 4;
-		path = "wscript";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001093 = {
-		isa = PBXFileReference;
-		name = "waf-xcode.sh";
-		fileEncoding = 4;
-		path = "waf-xcode.sh";
-		lastKnownFileType = "text";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001092 = {
-		isa = PBXGroup;
-		path = "xcode";
-		sourceTree = "<group>";
-		children = (
-			000027100000000562001093,
-		);
-		name = "xcode";
-	};
-
-	000027100000000562001003 = {
-		isa = PBXGroup;
-		path = "../";
-		sourceTree = "<group>";
-		children = (
-			000027100000000562001004,
-			000027100000000562001047,
-			000027100000000562001052,
-			000027100000000562001054,
-			000027100000000562001055,
-			000027100000000562001056,
-			000027100000000562001067,
-			000027100000000562001068,
-			000027100000000562001080,
-			000027100000000562001090,
-			000027100000000562001091,
-			000027100000000562001092,
-		);
-		name = "TBK_Jewish_Clock";
-	};
-
-	000027100000000562001001 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+/* Begin PBXGroup section */
+		000027100000000562001003 /* TBK_Jewish_Clock */ = {
+			isa = PBXGroup;
+			children = (
+				000027100000000562001004 /* out */,
+				000027100000000562001047 /* include */,
+				000027100000000562001052 /* lib */,
+				000027100000000562001054 /* pebble_app.ld */,
+				000027100000000562001055 /* README.md */,
+				000027100000000562001056 /* resources */,
+				000027100000000562001068 /* src */,
+				000027100000000562001080 /* tools */,
+				000027100000000562001090 /* waf */,
+				000027100000000562001091 /* wscript */,
+				000027100000000562001092 /* xcode */,
+				424D77E617522A8900E273A4 /* Products */,
+			);
+			name = TBK_Jewish_Clock;
+			path = ../;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001002 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001001,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001006 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001004 /* out */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = out;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001007 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001006,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001005 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "all_targets";
-		productName = "all_targets";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001007;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001009 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001047 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				000027100000000562001048 /* pebble_app.h */,
+				000027100000000562001049 /* pebble_app_info.h */,
+				000027100000000562001050 /* pebble_fonts.h */,
+				000027100000000562001051 /* pebble_os.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001010 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001009,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001008 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "menu_icon_hebrewwatch.png.pbi";
-		productName = "menu_icon_hebrewwatch.png.pbi";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001010;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001012 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001052 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				000027100000000562001053 /* libpebble.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001013 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001012,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001011 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "moon_phases.ttf.FONT_MOON_PHASES_SUBSET_30.pfo";
-		productName = "moon_phases.ttf.FONT_MOON_PHASES_SUBSET_30.pfo";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001013;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001015 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001056 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				000027100000000562001057 /* src */,
+				000027100000000562001066 /* wscript */,
+			);
+			path = resources;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001016 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001015,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001014 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "Roboto-Bold.ttf.FONT_ROBOTO_BOLD_SUBSET_49.pfo";
-		productName = "Roboto-Bold.ttf.FONT_ROBOTO_BOLD_SUBSET_49.pfo";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001016;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001018 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001057 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				000027100000000562001058 /* fonts */,
+				000027100000000562001063 /* images */,
+				000027100000000562001065 /* resource_map.json */,
+			);
+			path = src;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001019 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001018,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001017 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "Roboto-Condensed.ttf.FONT_ROBOTO_CONDENSED_21.pfo";
-		productName = "Roboto-Condensed.ttf.FONT_ROBOTO_CONDENSED_21.pfo";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001019;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001021 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001058 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				000027100000000562001059 /* Google Android License.txt */,
+				000027100000000562001060 /* moon_phases.ttf */,
+				000027100000000562001061 /* Roboto-Bold.ttf */,
+				000027100000000562001062 /* Roboto-Condensed.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001022 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001021,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001020 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "app_resources.pbpack.data";
-		productName = "app_resources.pbpack.data";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001022;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001024 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001063 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				000027100000000562001064 /* menu_icon_hebrewwatch.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001025 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001024,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001023 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "app_resources.pbpack.table";
-		productName = "app_resources.pbpack.table";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001025;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001027 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001068 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				000027100000000562001069 /* config.h */,
+				000027100000000562001070 /* hebrewdate.c */,
+				000027100000000562001071 /* hebrewdate.h */,
+				000027100000000562001072 /* my_math.c */,
+				000027100000000562001073 /* my_math.h */,
+				000027100000000562001074 /* suncalc.c */,
+				000027100000000562001075 /* suncalc.h */,
+				000027100000000562001076 /* TBK_Jewish_Clock.c */,
+				000027100000000562001077 /* TBK_Jewish_Clock.h */,
+				000027100000000562001078 /* xprintf.c */,
+				000027100000000562001079 /* xprintf.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001028 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001027,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001026 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "app_resources.pbpack.manifest";
-		productName = "app_resources.pbpack.manifest";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001028;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001030 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001080 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				000027100000000562001081 /* bitmapgen.py */,
+				000027100000000562001082 /* font */,
+				000027100000000562001085 /* generate_resource_code.py */,
+				000027100000000562001086 /* mkbundle.py */,
+				000027100000000562001087 /* pbpack_meta_data.py */,
+				000027100000000562001088 /* stm32_crc.py */,
+				000027100000000562001089 /* stm32_crc.pyc */,
+			);
+			path = tools;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001031 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001030,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001029 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "app_resources.pbpack";
-		productName = "app_resources.pbpack";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001031;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001033 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001082 /* font */ = {
+			isa = PBXGroup;
+			children = (
+				000027100000000562001083 /* __init__.py */,
+				000027100000000562001084 /* fontgen.py */,
+			);
+			path = font;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001034 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001033,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001032 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "resource_ids.auto.h";
-		productName = "resource_ids.auto.h";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001034;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001036 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001092 /* xcode */ = {
+			isa = PBXGroup;
+			children = (
+				000027100000000562001093 /* waf-xcode.sh */,
+			);
+			path = xcode;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
-
-	000027100000000562001037 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001036,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001035 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "pebble-app.elf";
-		productName = "pebble-app.elf";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001037;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001039 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		424D77E617522A8900E273A4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				424D77E517522A8900E273A4 /* index_dummy.app */,
+				424D77E717522A8900E273A4 /* clar_tests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
 		};
-		name = "waf";
-	};
+/* End PBXGroup section */
 
-	000027100000000562001040 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001039,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001038 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "pebble-app.raw.bin";
-		productName = "pebble-app.raw.bin";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001040;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001042 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+/* Begin PBXLegacyTarget section */
+		000027100000000562001005 /* all_targets */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001007 /* Build configuration list for PBXLegacyTarget "all_targets" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = all_targets;
+			passBuildSettingsInEnvironment = 1;
+			productName = all_targets;
 		};
-		name = "waf";
-	};
-
-	000027100000000562001043 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001042,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001041 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "inject-metadata";
-		productName = "inject-metadata";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001043;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001045 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
+		000027100000000562001008 /* menu_icon_hebrewwatch.png.pbi */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001010 /* Build configuration list for PBXLegacyTarget "menu_icon_hebrewwatch.png.pbi" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = menu_icon_hebrewwatch.png.pbi;
+			passBuildSettingsInEnvironment = 1;
+			productName = menu_icon_hebrewwatch.png.pbi;
 		};
-		name = "waf";
-	};
-
-	000027100000000562001046 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001045,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001044 = {
-		isa = PBXLegacyTarget;
-		buildArgumentsString = "$(ACTION)";
-		name = "TBK_Jewish_Clock.pbw";
-		productName = "TBK_Jewish_Clock.pbw";
-		passBuildSettingsInEnvironment = 1;
-		buildWorkingDirectory = "";
-		dependencies = (
-		);
-		buildConfigurationList = 000027100000000562001046;
-		buildToolPath = "./waf-xcode.sh";
-		buildPhases = (
-		);
-	};
-
-	000027100000000562001097 = {
-		isa = PBXFileReference;
-		name = "index_dummy";
-		fileEncoding = 4;
-		path = "";
-		lastKnownFileType = "wrapper.application";
-		sourceTree = "BUILT_PRODUCTS_DIR";
-	};
-
-	000027100000000562001095 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
-			CONFIGURATION_BUILD_DIR = "";
-			HEADER_SEARCH_PATHS = "$(SRCROOT)/../src/**";
-			PRODUCT_NAME = "index_dummy";
+		000027100000000562001011 /* moon_phases.ttf.FONT_MOON_PHASES_SUBSET_30.pfo */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001013 /* Build configuration list for PBXLegacyTarget "moon_phases.ttf.FONT_MOON_PHASES_SUBSET_30.pfo" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = moon_phases.ttf.FONT_MOON_PHASES_SUBSET_30.pfo;
+			passBuildSettingsInEnvironment = 1;
+			productName = moon_phases.ttf.FONT_MOON_PHASES_SUBSET_30.pfo;
 		};
-		name = "waf";
-	};
-
-	000027100000000562001096 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001095,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
-
-	000027100000000562001070 = {
-		isa = PBXFileReference;
-		name = "hebrewdate.c";
-		fileEncoding = 4;
-		path = "hebrewdate.c";
-		lastKnownFileType = "sourcecode.c.c";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001099 = {
-		isa = PBXBuildFile;
-		fileRef = 000027100000000562001070;
-	};
-
-	000027100000000562001072 = {
-		isa = PBXFileReference;
-		name = "my_math.c";
-		fileEncoding = 4;
-		path = "my_math.c";
-		lastKnownFileType = "sourcecode.c.c";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001100 = {
-		isa = PBXBuildFile;
-		fileRef = 000027100000000562001072;
-	};
-
-	000027100000000562001074 = {
-		isa = PBXFileReference;
-		name = "suncalc.c";
-		fileEncoding = 4;
-		path = "suncalc.c";
-		lastKnownFileType = "sourcecode.c.c";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001101 = {
-		isa = PBXBuildFile;
-		fileRef = 000027100000000562001074;
-	};
-
-	000027100000000562001076 = {
-		isa = PBXFileReference;
-		name = "TBK_Jewish_Clock.c";
-		fileEncoding = 4;
-		path = "TBK_Jewish_Clock.c";
-		lastKnownFileType = "sourcecode.c.c";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001102 = {
-		isa = PBXBuildFile;
-		fileRef = 000027100000000562001076;
-	};
-
-	000027100000000562001078 = {
-		isa = PBXFileReference;
-		name = "xprintf.c";
-		fileEncoding = 4;
-		path = "xprintf.c";
-		lastKnownFileType = "sourcecode.c.c";
-		sourceTree = "<group>";
-	};
-
-	000027100000000562001103 = {
-		isa = PBXBuildFile;
-		fileRef = 000027100000000562001078;
-	};
-
-	000027100000000562001098 = {
-		isa = PBXSourcesBuildPhase;
-		files = (
-			000027100000000562001099,
-			000027100000000562001100,
-			000027100000000562001101,
-			000027100000000562001102,
-			000027100000000562001103,
-		);
-		buildActionMask = 2147483647;
-		runOnlyForDeploymentPostprocessing = 0;
-	};
-
-	000027100000000562001094 = {
-		isa = PBXNativeTarget;
-		productReference = 000027100000000562001097;
-		name = "index_dummy";
-		productName = "index_dummy";
-		dependencies = (
-		);
-		productType = "com.apple.product-type.application";
-		buildRules = (
-		);
-		buildConfigurationList = 000027100000000562001096;
-		buildPhases = (
-			000027100000000562001098,
-		);
-	};
-
-	000027100000000562001108 = {
-		isa = PBXFileReference;
-		name = "clar_tests";
-		fileEncoding = 4;
-		path = "";
-		lastKnownFileType = "wrapper.application";
-		sourceTree = "BUILT_PRODUCTS_DIR";
-	};
-
-	000027100000000562001109 = {
-		isa = XCBuildConfiguration;
-		baseConfigurationReference = "";
-		buildSettings = {
-			WRAPPER_EXTENSION = "octest";
-			PRODUCT_NAME = "$(TARGET_NAME)";
-			COMBINE_HIDPI_IMAGES = "YES";
+		000027100000000562001014 /* Roboto-Bold.ttf.FONT_ROBOTO_BOLD_SUBSET_49.pfo */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001016 /* Build configuration list for PBXLegacyTarget "Roboto-Bold.ttf.FONT_ROBOTO_BOLD_SUBSET_49.pfo" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = "Roboto-Bold.ttf.FONT_ROBOTO_BOLD_SUBSET_49.pfo";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Roboto-Bold.ttf.FONT_ROBOTO_BOLD_SUBSET_49.pfo";
 		};
-		name = "waf";
-	};
+		000027100000000562001017 /* Roboto-Condensed.ttf.FONT_ROBOTO_CONDENSED_21.pfo */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001019 /* Build configuration list for PBXLegacyTarget "Roboto-Condensed.ttf.FONT_ROBOTO_CONDENSED_21.pfo" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = "Roboto-Condensed.ttf.FONT_ROBOTO_CONDENSED_21.pfo";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Roboto-Condensed.ttf.FONT_ROBOTO_CONDENSED_21.pfo";
+		};
+		000027100000000562001020 /* app_resources.pbpack.data */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001022 /* Build configuration list for PBXLegacyTarget "app_resources.pbpack.data" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = app_resources.pbpack.data;
+			passBuildSettingsInEnvironment = 1;
+			productName = app_resources.pbpack.data;
+		};
+		000027100000000562001023 /* app_resources.pbpack.table */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001025 /* Build configuration list for PBXLegacyTarget "app_resources.pbpack.table" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = app_resources.pbpack.table;
+			passBuildSettingsInEnvironment = 1;
+			productName = app_resources.pbpack.table;
+		};
+		000027100000000562001026 /* app_resources.pbpack.manifest */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001028 /* Build configuration list for PBXLegacyTarget "app_resources.pbpack.manifest" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = app_resources.pbpack.manifest;
+			passBuildSettingsInEnvironment = 1;
+			productName = app_resources.pbpack.manifest;
+		};
+		000027100000000562001029 /* app_resources.pbpack */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001031 /* Build configuration list for PBXLegacyTarget "app_resources.pbpack" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = app_resources.pbpack;
+			passBuildSettingsInEnvironment = 1;
+			productName = app_resources.pbpack;
+		};
+		000027100000000562001032 /* resource_ids.auto.h */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001034 /* Build configuration list for PBXLegacyTarget "resource_ids.auto.h" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = resource_ids.auto.h;
+			passBuildSettingsInEnvironment = 1;
+			productName = resource_ids.auto.h;
+		};
+		000027100000000562001035 /* pebble-app.elf */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001037 /* Build configuration list for PBXLegacyTarget "pebble-app.elf" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = "pebble-app.elf";
+			passBuildSettingsInEnvironment = 1;
+			productName = "pebble-app.elf";
+		};
+		000027100000000562001038 /* pebble-app.raw.bin */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001040 /* Build configuration list for PBXLegacyTarget "pebble-app.raw.bin" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = "pebble-app.raw.bin";
+			passBuildSettingsInEnvironment = 1;
+			productName = "pebble-app.raw.bin";
+		};
+		000027100000000562001041 /* inject-metadata */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001043 /* Build configuration list for PBXLegacyTarget "inject-metadata" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = "inject-metadata";
+			passBuildSettingsInEnvironment = 1;
+			productName = "inject-metadata";
+		};
+		000027100000000562001044 /* TBK_Jewish_Clock.pbw */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 000027100000000562001046 /* Build configuration list for PBXLegacyTarget "TBK_Jewish_Clock.pbw" */;
+			buildPhases = (
+			);
+			buildToolPath = "./waf-xcode.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = TBK_Jewish_Clock.pbw;
+			passBuildSettingsInEnvironment = 1;
+			productName = TBK_Jewish_Clock.pbw;
+		};
+/* End PBXLegacyTarget section */
 
-	000027100000000562001110 = {
-		isa = XCConfigurationList;
-		buildConfigurations = (
-			000027100000000562001109,
-		);
-		defaultConfigurationIsVisible = 0;
-		defaultConfigurationName = "waf";
-	};
+/* Begin PBXNativeTarget section */
+		000027100000000562001094 /* index_dummy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 000027100000000562001096 /* Build configuration list for PBXNativeTarget "index_dummy" */;
+			buildPhases = (
+				000027100000000562001098 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = index_dummy;
+			productName = index_dummy;
+			productReference = 424D77E517522A8900E273A4 /* index_dummy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		000027100000000562001104 /* clar_tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 000027100000000562001110 /* Build configuration list for PBXNativeTarget "clar_tests" */;
+			buildPhases = (
+				000027100000000562001107 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = clar_tests;
+			productName = clar_tests;
+			productReference = 424D77E717522A8900E273A4 /* clar_tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
 
-	000027100000000562001107 = {
-		isa = PBXShellScriptBuildPhase;
-		files = (
-		);
-		shellPath = "/bin/sh";
-		buildActionMask = 2147483647;
-		inputPaths = (
-		);
-		outputPaths = (
-		);
-		shellScript = "export ACTION=test
-./waf-xcode.sh";
-		runOnlyForDeploymentPostProcessing = 1;
-	};
+/* Begin PBXProject section */
+		000027100000000562001000 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 000027100000000562001002 /* Build configuration list for PBXProject "TBK_Jewish_Clock" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 000027100000000562001003 /* TBK_Jewish_Clock */;
+			productRefGroup = 424D77E617522A8900E273A4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				000027100000000562001005 /* all_targets */,
+				000027100000000562001008 /* menu_icon_hebrewwatch.png.pbi */,
+				000027100000000562001011 /* moon_phases.ttf.FONT_MOON_PHASES_SUBSET_30.pfo */,
+				000027100000000562001014 /* Roboto-Bold.ttf.FONT_ROBOTO_BOLD_SUBSET_49.pfo */,
+				000027100000000562001017 /* Roboto-Condensed.ttf.FONT_ROBOTO_CONDENSED_21.pfo */,
+				000027100000000562001020 /* app_resources.pbpack.data */,
+				000027100000000562001023 /* app_resources.pbpack.table */,
+				000027100000000562001026 /* app_resources.pbpack.manifest */,
+				000027100000000562001029 /* app_resources.pbpack */,
+				000027100000000562001032 /* resource_ids.auto.h */,
+				000027100000000562001035 /* pebble-app.elf */,
+				000027100000000562001038 /* pebble-app.raw.bin */,
+				000027100000000562001041 /* inject-metadata */,
+				000027100000000562001044 /* TBK_Jewish_Clock.pbw */,
+				000027100000000562001094 /* index_dummy */,
+				000027100000000562001104 /* clar_tests */,
+			);
+		};
+/* End PBXProject section */
 
-	000027100000000562001104 = {
-		isa = PBXNativeTarget;
-		productReference = 000027100000000562001108;
-		name = "clar_tests";
-		productName = "clar_tests";
-		dependencies = (
-		);
-		productType = "com.apple.product-type.bundle";
-		buildRules = (
-		);
-		buildConfigurationList = 000027100000000562001110;
-		buildPhases = (
-			000027100000000562001107,
-		);
-	};
+/* Begin PBXShellScriptBuildPhase section */
+		000027100000000562001107 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export ACTION=test\n./waf-xcode.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
 
-	000027100000000562001000 = {
-		isa = PBXProject;
-		projectDirPath = "";
-		projectRoot = "";
-		hasScannedForEncodings = 1;
-		compatibilityVersion = "Xcode 3.2";
-		mainGroup = 000027100000000562001003;
-		buildConfigurationList = 000027100000000562001002;
-		targets = (
-			000027100000000562001005,
-			000027100000000562001008,
-			000027100000000562001011,
-			000027100000000562001014,
-			000027100000000562001017,
-			000027100000000562001020,
-			000027100000000562001023,
-			000027100000000562001026,
-			000027100000000562001029,
-			000027100000000562001032,
-			000027100000000562001035,
-			000027100000000562001038,
-			000027100000000562001041,
-			000027100000000562001044,
-			000027100000000562001094,
-			000027100000000562001104,
-		);
-	};
+/* Begin PBXSourcesBuildPhase section */
+		000027100000000562001098 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000027100000000562001099 /* hebrewdate.c in Sources */,
+				000027100000000562001100 /* my_math.c in Sources */,
+				000027100000000562001101 /* suncalc.c in Sources */,
+				000027100000000562001102 /* TBK_Jewish_Clock.c in Sources */,
+				000027100000000562001103 /* xprintf.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
 
+/* Begin XCBuildConfiguration section */
+		000027100000000562001001 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001006 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001009 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001012 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001015 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001018 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001021 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001024 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001027 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001030 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001033 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001036 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001039 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001042 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001045 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = waf;
+		};
+		000027100000000562001095 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../src/**";
+				PRODUCT_NAME = index_dummy;
+			};
+			name = waf;
+		};
+		000027100000000562001109 /* waf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = waf;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		000027100000000562001002 /* Build configuration list for PBXProject "TBK_Jewish_Clock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001001 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001007 /* Build configuration list for PBXLegacyTarget "all_targets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001006 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001010 /* Build configuration list for PBXLegacyTarget "menu_icon_hebrewwatch.png.pbi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001009 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001013 /* Build configuration list for PBXLegacyTarget "moon_phases.ttf.FONT_MOON_PHASES_SUBSET_30.pfo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001012 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001016 /* Build configuration list for PBXLegacyTarget "Roboto-Bold.ttf.FONT_ROBOTO_BOLD_SUBSET_49.pfo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001015 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001019 /* Build configuration list for PBXLegacyTarget "Roboto-Condensed.ttf.FONT_ROBOTO_CONDENSED_21.pfo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001018 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001022 /* Build configuration list for PBXLegacyTarget "app_resources.pbpack.data" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001021 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001025 /* Build configuration list for PBXLegacyTarget "app_resources.pbpack.table" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001024 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001028 /* Build configuration list for PBXLegacyTarget "app_resources.pbpack.manifest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001027 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001031 /* Build configuration list for PBXLegacyTarget "app_resources.pbpack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001030 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001034 /* Build configuration list for PBXLegacyTarget "resource_ids.auto.h" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001033 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001037 /* Build configuration list for PBXLegacyTarget "pebble-app.elf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001036 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001040 /* Build configuration list for PBXLegacyTarget "pebble-app.raw.bin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001039 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001043 /* Build configuration list for PBXLegacyTarget "inject-metadata" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001042 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001046 /* Build configuration list for PBXLegacyTarget "TBK_Jewish_Clock.pbw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001045 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001096 /* Build configuration list for PBXNativeTarget "index_dummy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001095 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+		000027100000000562001110 /* Build configuration list for PBXNativeTarget "clar_tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000027100000000562001109 /* waf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = waf;
+		};
+/* End XCConfigurationList section */
 	};
-	rootObject = 000027100000000562001000;
+	rootObject = 000027100000000562001000 /* Project object */;
 }
