@@ -55,11 +55,9 @@
 // #define USE_ZMANIM
 
 // ***************** ALERTS *****************
-
 // Comment this line to disable vibration alert before end of Mincha (sunset)
 // If defined, it is the number of minutes before sunset for the alert
 #define MINCHA_ALERT  (18)    // 18 minutes is also good for Shabbat candlelighting alert!
-
-// Comment to disable start of Mincha Gedola and ketana alerts
+// Comment to disable start of Mincha Gdola and Ktana alerts
 #define MINCHA_GEDOLA_ALERT
 #define MINCHA_KETANA_ALERT
