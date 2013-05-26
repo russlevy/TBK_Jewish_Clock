@@ -140,7 +140,7 @@ void sunGraphLayerUpdate(Layer *me, GContext* ctx)
   } else {  // night
     graphics_context_set_stroke_color(ctx, GColorWhite);
   }
-  float angle = (18*60 - currentTime)/24.0 * 2.0 * M_PI;
+  float angle = (18.0 - minutes2Hours(currentTime))/24.0 * 2.0 * M_PI;
   GPoint toPoint = GPoint(sunCenter.x + my_cos(angle)*sunSize/2, sunCenter.y - my_sin(angle)*sunSize/2);
   graphics_draw_line(ctx, sunCenter, toPoint);
 }
@@ -242,8 +242,8 @@ void updateMoonAndSun() {
   text_layer_set_text(&moonLayer, moonString);
   
   // ******************* SUN TIMES
-  sunriseTime = timeAsMinutes(calcSunRise(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f));
-  sunsetTime = timeAsMinutes(calcSunSet(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f));
+  sunriseTime = hours2Minutes(calcSunRise(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f));
+  sunsetTime = hours2Minutes(calcSunSet(currentPblTime.tm_year, currentPblTime.tm_mon+1, currentPblTime.tm_mday, LATITUDE, LONGITUDE, 91.0f));
 	hatsotTime = (sunriseTime+sunsetTime)/2;
   
   adjustTimezone(&sunriseTime);
@@ -255,36 +255,29 @@ void updateMoonAndSun() {
   displayTime(sunsetTime, &sunsetLayer, sunsetString, sizeof(sunsetString));
   
   // SUN GRAPHIC
-  float rise2 = timeAsHours(sunriseTime)+12.0f;
+  float rise2 = minutes2Hours(sunriseTime)+12.0f;
   sun_path_info.points[1].x = (int16_t)(my_sin(rise2/24 * M_PI * 2) * 120);
   sun_path_info.points[1].y = -(int16_t)(my_cos(rise2/24 * M_PI * 2) * 120);
-  float set2 =  timeAsHours(sunsetTime)+12.0f;
+  float set2 =  minutes2Hours(sunsetTime)+12.0f;
   sun_path_info.points[4].x = (int16_t)(my_sin(set2/24 * M_PI * 2) * 120);
   sun_path_info.points[4].y = -(int16_t)(my_cos(set2/24 * M_PI * 2) * 120);
 }
 
 // Update zmanim
 void updateZmanim() {
-  zmanHourDuration = (timeAsHours(sunsetTime) - timeAsHours(sunriseTime)) / 12.0; // in hours
-  if((currentTime >= sunriseTime) && (currentTime <= sunsetTime)) { // Day
-    float zh = ((float)(currentTime-sunriseTime))/60.0/zmanHourDuration;
-    zmanHourNumber = (int)zh;
-    float hoursUntilNext = ((float)(zmanHourNumber+1))*zmanHourDuration;
-    timeUntilNextHour = sunriseTime + ((int)(hoursUntilNext * 60.0)) - currentTime;
-  } else {  // Night
-    zmanHourDuration = 2.0 - zmanHourDuration;  // Night hours;
-    int cTime;
-    if(currentTime > sunsetTime) {
-      cTime = currentTime;
-    } else {
-      cTime = currentTime + 24*60;  // past midnight, add 24 hours
-    }
-    float zh = ((float)(cTime-sunsetTime))/60.0/zmanHourDuration;
-    zmanHourNumber = (int)zh;
-    float hoursUntilNext = ((float)(zmanHourNumber+1))*zmanHourDuration;
-    timeUntilNextHour = sunsetTime + ((int)(hoursUntilNext * 60.0)) - cTime;
+  zmanHourDuration = (minutes2Hours(sunsetTime) - minutes2Hours(sunriseTime)) / 12.0; // in hours
+  int startTime = sunriseTime;
+  int theTime = currentTime;
+  if((currentTime < sunriseTime) || (currentTime > sunsetTime)) { // Night
+    startTime = sunsetTime;
+    zmanHourDuration = 2.0 - zmanHourDuration; // Day hour + Night hour = 2
+    if(currentTime < sunriseTime) theTime += 24*60;
   }
-  zmanHourNumber++;  // We start at hour # 1 not 0
+  float zh = ((float)(theTime - startTime))/60.0/zmanHourDuration;
+  zmanHourNumber = (int)zh + 1;
+  float hoursUntilNext = ((float)zmanHourNumber)*zmanHourDuration;
+  timeUntilNextHour = startTime + ((int)(hoursUntilNext * 60.0)) - theTime;
+
   int nextHour = timeUntilNextHour / 60;
   int nextMinute = timeUntilNextHour % 60;
   xsprintf(zmanHourString, "%d", zmanHourNumber);
@@ -357,16 +350,14 @@ int moon_phase(int jdn)
   return (int)(jd*27 + 0.5); /* scale fraction from 0-27 and round by adding 0.5 */
 }
 
-int timeAsMinutes(float theTime) {
+int hours2Minutes(float theTime) {
   int hours = (int)theTime;
   int minutes = (int)((theTime - hours)*60.0);
   return (hours * 60) + minutes;
 }
 
-float timeAsHours(int theTime) {
-  float hours = (float)(theTime / 60);
-  float minutes = (float)(theTime % 60);
-  return hours + (minutes / 60.0);
+float minutes2Hours(int theTime) {
+  return ((float)(theTime))/60.0;
 }
 
 void displayTime(int theTime, TextLayer *theLayer, char *theString, int maxSize){

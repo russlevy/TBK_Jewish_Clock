@@ -121,8 +121,8 @@ void initTextLayer(TextLayer *theLayer, int x, int y, int w, int h, GColor textC
 void adjustTimezone(int* time);
 int tm2jd(PblTm *time);
 int moon_phase(int jdn);
-int timeAsMinutes(float theTime);
-float timeAsHours(int theTime);
+int hours2Minutes(float theTime);
+float minutes2Hours(int theTime);
 void displayTime(int theTime, TextLayer *theLayer, char *theString, int maxSize);
 
 
