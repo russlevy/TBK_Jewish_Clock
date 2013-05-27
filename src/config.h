@@ -22,13 +22,17 @@
 // #define LATITUDE    (32.081261)
 // #define LONGITUDE 	(34.826726)
 
+// Paris
+#define LATITUDE    (48.856638)
+#define LONGITUDE   (2.352241)
+
 // New York, NY
 //#define LATITUDE    (40.714353)
 //#define LONGITUDE 	(-74.005973)
 
 // Palo Alto, CA
-#define LATITUDE    (37.441883)
-#define LONGITUDE 	(-122.143019)
+//#define LATITUDE    (37.441883)
+//#define LONGITUDE 	(-122.143019)
 
 // Los Angeles
 //#define LATITUDE    (34.036658)
@@ -37,13 +41,16 @@
 // ******** Enter your timezone here, for example, if you are GMT+2 (Israel), enter 2
 
 // Israel
-// #define TIMEZONE (2)
+// #define TIMEZONE (+2)
+
+// France
+#define TIMEZONE (+1)
 
 // USA East
 //#define TIMEZONE (-5)
 
 // USA West
-#define TIMEZONE (-8)
+//#define TIMEZONE (-8)
 
 // ******** DAYLIGHT SAVING TIME
 // Currently the Pebble SDK does not tell if Daily Saving Time is active, so must set this flag and recompile (yuk!). Use 0 if not-DST, use -1 if DST.
