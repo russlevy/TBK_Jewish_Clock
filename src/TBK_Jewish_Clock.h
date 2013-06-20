@@ -23,7 +23,7 @@
 #define MY_UUID { 0xB6, 0x79, 0x42, 0x92, 0xFA, 0x2C, 0x4B, 0x4B, 0x9A, 0xCC, 0xE8, 0xD6, 0x13, 0x68, 0x57, 0x56 }
 PBL_APP_INFO(MY_UUID,
              "TBK Jewish Clock", "Ary Tebeka",
-             1, 1, /* App version */
+             1, 2, /* App version */
              RESOURCE_ID_IMAGE_MENU_ICON,
              APP_INFO_WATCH_FACE);
 Window window;

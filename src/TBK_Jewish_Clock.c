@@ -305,11 +305,25 @@ void checkAlerts() {
   }
 #endif
 
-#ifdef MINCHA_ALERT
+#ifdef MINCHA_GEDOLA_ALERT
   if(currentTime == (sunsetTime - MINCHA_ALERT)) { // this is the minute for the alert
     mustAlert = -1;
     xsprintf(alertString, "SUNSET-%dmn", MINCHA_ALERT);
   }
+#endif
+    
+#ifdef PLAG_ALERT
+    if(currentTime == (sunsetTime - ((int)(zmanHourDuration*60.0*1.25)))) {  // 1 and a quarter hour before sunset
+        mustAlert = -1;
+        xsprintf(alertString, "PLAG", MINCHA_ALERT);
+    }
+#endif
+    
+#ifdef SUNSET_ALERT
+    if(currentTime == (sunsetTime)) {
+        mustAlert = -1;
+        xsprintf(alertString, "SUNSET NOW!", MINCHA_ALERT);
+    }
 #endif
 
   if(mustAlert) {

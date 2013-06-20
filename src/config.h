@@ -19,12 +19,12 @@
 //#define LONGITUDE 	(34.871326)
 
 // BNEI BRAK
-// #define LATITUDE    (32.081261)
-// #define LONGITUDE 	(34.826726)
+ #define LATITUDE    (32.081261)
+ #define LONGITUDE 	(34.826726)
 
 // Paris
-#define LATITUDE    (48.856638)
-#define LONGITUDE   (2.352241)
+//#define LATITUDE    (48.856638)
+//#define LONGITUDE   (2.352241)
 
 // New York, NY
 //#define LATITUDE    (40.714353)
@@ -41,10 +41,10 @@
 // ******** Enter your timezone here, for example, if you are GMT+2 (Israel), enter 2
 
 // Israel
-// #define TIMEZONE (+2)
+ #define TIMEZONE (+2)
 
 // France
-#define TIMEZONE (+1)
+//#define TIMEZONE (+1)
 
 // USA East
 //#define TIMEZONE (-5)
@@ -65,6 +65,8 @@
 // Comment this line to disable vibration alert before end of Mincha (sunset)
 // If defined, it is the number of minutes before sunset for the alert
 #define MINCHA_ALERT  (18)    // 18 minutes is also good for Shabbat candlelighting alert!
-// Comment to disable start of Mincha Gdola and Ktana alerts
+// Comment to disable start of Mincha Gdola and Ktana alerts, plag and shkia (sunset) alerts
 #define MINCHA_GEDOLA_ALERT
 #define MINCHA_KETANA_ALERT
+#define PLAG_ALERT
+#define SUNSET_ALERT
