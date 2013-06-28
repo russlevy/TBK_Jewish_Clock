@@ -13,6 +13,7 @@
 // NOTE: longitude is positive for East and negative for West
 // Use http://itouchmap.com/latlong.html to find the values for your location
 
+
 // Jerusalem
 //#define LATITUDE    (31.752766)
 //#define LONGITUDE 	(35.119600)
