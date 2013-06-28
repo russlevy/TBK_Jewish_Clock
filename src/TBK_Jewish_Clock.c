@@ -31,7 +31,7 @@ void handle_init(AppContextRef ctx) {
   appContext = ctx;
   window_init(&window, "Window Name");
   window_stack_push(&window, true /* Animated */);
-  window_set_background_color(&window, GColorBlack);
+  window_set_background_color(&window, kBackgroundColor);
   resource_init_current_app(&APP_RESOURCES);
   
   // Init time format string
@@ -50,22 +50,24 @@ void handle_init(AppContextRef ctx) {
   // ******************************************
   
   // Gregorian Day
-  initTextLayer(&dayLayer, 0, 0, 144, 25, GColorWhite, GColorClear, GTextAlignmentLeft, mediumFont);
+  initTextLayer(&dayLayer, 0, 0, 144, 25, kTextColor, GColorClear, GTextAlignmentLeft, mediumFont);
 
   // Hebrew Day
-  initTextLayer(&hDayLayer, 0, 0, 144, 25, GColorWhite, GColorClear, GTextAlignmentRight, mediumFont);
+  initTextLayer(&hDayLayer, 0, 0, 144, 25, kTextColor, GColorClear, GTextAlignmentRight, mediumFont);
   
   //  Moon phase
-  initTextLayer(&moonLayer, 0, 10, 144, 168-115, GColorWhite, GColorClear, GTextAlignmentCenter, moonFont);
-  
+//  initTextLayer(&moonLayer, 0, 10, 144, 168-115, kTextColor, GColorClear, GTextAlignmentCenter, moonFont);
+  initTextLayer(&moonLayer, 56, 9, 32, 32, GColorWhite, GColorBlack, GTextAlignmentCenter, moonFont);
+
+    
   // Gregorian Month
-  initTextLayer(&monthLayer, 0, 25, 144, 15, GColorWhite, GColorClear, GTextAlignmentLeft, smallFont);
+  initTextLayer(&monthLayer, 0, 25, 144, 15, kTextColor, GColorClear, GTextAlignmentLeft, smallFont);
   
   // Hebrew Month
-  initTextLayer(&hMonthLayer, 0, 25, 144, 15, GColorWhite, GColorClear, GTextAlignmentRight, smallFont);
+  initTextLayer(&hMonthLayer, 0, 25, 144, 15, kTextColor, GColorClear, GTextAlignmentRight, smallFont);
   
   //  Time
-  initTextLayer(&timeLayer, 0, 40, 144, 50, GColorWhite, GColorClear, GTextAlignmentCenter, largeFont);
+  initTextLayer(&timeLayer, 0, 40, 144, 50, kTextColor, GColorClear, GTextAlignmentCenter, largeFont);
   
   // Line
   layer_init(&lineLayer, window.layer.frame);
@@ -73,9 +75,9 @@ void handle_init(AppContextRef ctx) {
   layer_add_child(&window.layer, &lineLayer);
   
   // Zman hours labels
-  initTextLayer(&zmanHourLabelLayer, 0, 100, 144, 15, GColorWhite, GColorClear, GTextAlignmentLeft, smallFont);
+  initTextLayer(&zmanHourLabelLayer, 0, 100, 144, 15, kTextColor, GColorClear, GTextAlignmentLeft, smallFont);
   text_layer_set_text(&zmanHourLabelLayer, zmanHourLabelString);
-  initTextLayer(&nextHourLabelLayer, 0, 100, 144, 15, GColorWhite, GColorClear, GTextAlignmentRight, smallFont);
+  initTextLayer(&nextHourLabelLayer, 0, 100, 144, 15, kTextColor, GColorClear, GTextAlignmentRight, smallFont);
   text_layer_set_text(&nextHourLabelLayer, nextHourLabelString);
   
   // Sun Graph
@@ -85,23 +87,23 @@ void handle_init(AppContextRef ctx) {
   layer_add_child(&window.layer, &sunGraphLayer);
   
   // Optional Alert message
-  initTextLayer(&alertLayer, 0, 102, 144, 36, GColorBlack, GColorWhite, GTextAlignmentCenter, mediumBoldFont);
+  initTextLayer(&alertLayer, 0, 102, 144, 36, kBackgroundColor, kTextColor, GTextAlignmentCenter, mediumBoldFont);
   layer_remove_from_parent(&alertLayer.layer);  // don't show now!
   
   // Zman hour number
-  initTextLayer(&zmanHourLayer, 0, 108, 144, 25, GColorWhite, GColorClear, GTextAlignmentLeft, mediumFont);
+  initTextLayer(&zmanHourLayer, 0, 108, 144, 25, kTextColor, GColorClear, GTextAlignmentLeft, mediumFont);
   
   // Next zman hour
-  initTextLayer(&nextHourLayer, 0, 108, 144, 25, GColorWhite, GColorClear, GTextAlignmentRight, mediumFont);
+  initTextLayer(&nextHourLayer, 0, 108, 144, 25, kTextColor, GColorClear, GTextAlignmentRight, mediumFont);
   
   //  Sunrise hour
-  initTextLayer(&sunriseLayer, 0, 145, 144, 30, GColorWhite, GColorClear, GTextAlignmentLeft, tinyFont);
+  initTextLayer(&sunriseLayer, 0, 145, 144, 30, kTextColor, GColorClear, GTextAlignmentLeft, tinyFont);
   
   // Hatsot hour
-  initTextLayer(&hatsotLayer, 0, 145, 144, 30, GColorWhite, GColorClear, GTextAlignmentCenter, tinyFont);
+  initTextLayer(&hatsotLayer, 0, 145, 144, 30, kTextColor, GColorClear, GTextAlignmentCenter, tinyFont);
   
   //  Sunset hour
-  initTextLayer(&sunsetLayer, 0, 145, 144, 30, GColorWhite, GColorClear, GTextAlignmentRight, tinyFont);
+  initTextLayer(&sunsetLayer, 0, 145, 144, 30, kTextColor, GColorClear, GTextAlignmentRight, tinyFont);
   
   updateWatch();  // update display at startup to avoid empty screen until next tick
 }
@@ -109,7 +111,7 @@ void handle_init(AppContextRef ctx) {
 // Draw line
 void lineLayerUpdate(Layer *me, GContext* ctx) {
   (void)me;
-  graphics_context_set_stroke_color(ctx, GColorWhite);
+  graphics_context_set_stroke_color(ctx, kTextColor);
   graphics_draw_line(ctx, GPoint(0, 97), GPoint(144, 97));
   graphics_draw_line(ctx, GPoint(0, 98), GPoint(144, 98));
 }
@@ -118,6 +120,11 @@ void lineLayerUpdate(Layer *me, GContext* ctx) {
 void sunGraphLayerUpdate(Layer *me, GContext* ctx)
 {
   (void)me;
+    
+    // Fill layer with black
+    graphics_context_set_fill_color(ctx, GColorBlack);
+    graphics_fill_rect(ctx, GRect(0, 0, sunSize+2, sunSize+2), 0, 0);
+    
   GPoint sunCenter = GPoint(sunSize/2, sunSize/2);
   // Draw white filled circle
   graphics_context_set_fill_color(ctx, GColorWhite);
