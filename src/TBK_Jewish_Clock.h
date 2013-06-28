@@ -23,7 +23,7 @@
 #define MY_UUID { 0xB6, 0x79, 0x42, 0x92, 0xFA, 0x2C, 0x4B, 0x4B, 0x9A, 0xCC, 0xE8, 0xD6, 0x13, 0x68, 0x57, 0x56 }
 PBL_APP_INFO(MY_UUID,
              "TBK Jewish Clock", "Ary Tebeka",
-             1, 4, /* App version */
+             1, 3, /* App version */
              RESOURCE_ID_IMAGE_MENU_ICON,
              APP_INFO_WATCH_FACE);
 Window window;
@@ -46,7 +46,7 @@ AppContextRef appContext;
 TextLayer dayLayer;           char dayString[]=           "17";
 TextLayer hDayLayer;          char hDayString[]=          "13";
 
-TextLayer moonLayer;          char moonString[]=          " ";
+TextLayer moonLayer;          char moonString[]=          "G";
 
 TextLayer monthLayer;         char monthString[]=         "May";
 TextLayer hMonthLayer;        // char hMonthString[]=      "Cheshvan";
@@ -60,6 +60,8 @@ TextLayer nextHourLabelLayer; char nextHourLabelString[]= "Next In:";
 Layer sunGraphLayer;
 const int sunY = 104;
 const int sunSize = 38;
+
+int hebrewDayNumber;
 
 #ifdef ZMANIM
 TextLayer currentZmanLayer;   char currentZmanString[]=   "Mincha Gedola";

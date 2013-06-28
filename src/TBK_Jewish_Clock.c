@@ -57,7 +57,7 @@ void handle_init(AppContextRef ctx) {
   
   //  Moon phase
 //  initTextLayer(&moonLayer, 0, 10, 144, 168-115, kTextColor, GColorClear, GTextAlignmentCenter, moonFont);
-  initTextLayer(&moonLayer, 56, 9, 32, 32, GColorWhite, GColorBlack, GTextAlignmentCenter, moonFont);
+  initTextLayer(&moonLayer, 56, 9, 32, 32, kTextColor, GColorClear, GTextAlignmentCenter, moonFont);
 
     
   // Gregorian Month
@@ -216,6 +216,7 @@ void updateHebrewDate() {
   // Convert julian day to hebrew date
   int hDay, hMonth, hYear, hDayTishrey, hNextTishrey;
   hdate_jd_to_hdate(julianDay, &hDay, &hMonth, &hYear, &hDayTishrey, &hNextTishrey);
+    hebrewDayNumber = hDay;
   char *hebrewMonthName = hdate_get_month_string(hMonth);
   xsprintf(hDayString, "%d",hDay);
   text_layer_set_text(&hDayLayer, hDayString);
@@ -225,6 +226,40 @@ void updateHebrewDate() {
 // Update MOON phase and Sun info
 void updateMoonAndSun() {
   // ******************* MOON
+    
+    // Moonphase font:
+    // A-Z phases on white background
+    // a-z phases on black background
+    // 0 = new moon
+    
+    
+    float jDay = (float) (hebrewDayNumber - 1);     // 0 to 29
+    float mPhase = jDay * 26.0 / 29.0;  // 0 to 26
+    int moonphase_number = (int)mPhase;
+    // correct for southern hemisphere
+    if ((moonphase_number > 0) && (LATITUDE < 0)) {
+        moonphase_number = 26 - moonphase_number;
+    }
+
+    char moonChar;
+    
+    if(moonphase_number < 1) {    // new moon
+        moonChar = '0';
+    } else {
+        int offset = moonphase_number - 1;
+#ifndef REVERSED
+        // Black background we must use the opposite phase direction...
+        if(offset >= 13) {
+            offset -= 13;
+        } else {
+            offset += 13;
+        }
+#endif
+        moonChar = 'A' + offset;
+    }
+    moonString[0] = moonChar;
+    
+    /*
   int moonphase_number = moon_phase(tm2jd(&currentPblTime));
   // correct for southern hemisphere
   if ((moonphase_number > 0) && (LATITUDE < 0))
@@ -240,6 +275,8 @@ void updateMoonAndSun() {
   } else {
     moonString[0] = (unsigned char)(moonphase_number+95);
   }
+     */
+     
   text_layer_set_text(&moonLayer, moonString);
   
   // ******************* SUN TIMES

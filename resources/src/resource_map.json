@@ -6,7 +6,7 @@
             "file": "images/menu_icon_hebrewwatch.png"
             },
             {
-            "characterRegex": "[a-z01]",
+            "characterRegex": "[A-Za-z0]",
             "defName": "FONT_MOON_PHASES_SUBSET_30",
             "type": "font",
             "file": "fonts/moon_phases.ttf"
