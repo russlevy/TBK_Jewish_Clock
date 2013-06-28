@@ -7,6 +7,9 @@
 // https://itunes.apple.com/us/artist/ary-tebeka/id375595955?uo=4
 // https://itunes.apple.com/us/artist/tebeka-software-solutions/id285016307?uo=4
 
+// uncomment the next line to show the watch as black on white
+#define REVERSED 1
+
 // NOTE: longitude is positive for East and negative for West
 // Use http://itouchmap.com/latlong.html to find the values for your location
 
