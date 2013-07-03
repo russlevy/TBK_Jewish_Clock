@@ -136,6 +136,10 @@ void sunGraphLayerUpdate(Layer *me, GContext* ctx)
   gpath_move_to(&sun_path, sunCenter);
   gpath_draw_filled(ctx, &sun_path);
   
+    // Draw white circle
+    graphics_context_set_stroke_color(ctx, GColorWhite);
+    graphics_draw_circle(ctx, sunCenter, sunSize/2);
+    
   // Draw hand/needle at current time
   // Black if day, white if night
   if((currentTime >= sunriseTime) && (currentTime <= sunsetTime)) { // Day
