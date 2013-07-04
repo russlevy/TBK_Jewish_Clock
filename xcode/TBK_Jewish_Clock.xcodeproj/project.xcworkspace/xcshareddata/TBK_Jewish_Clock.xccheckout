@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3EC4C7AB-C8F6-40DB-9510-2CD94211CA3C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TBK_Jewish_Clock</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1849E521-67F1-4F48-B948-0854DD3B46F4</key>
+		<string>ssh://github.com/arytbk/TBK_Jewish_Clock.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>xcode/TBK_Jewish_Clock.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1849E521-67F1-4F48-B948-0854DD3B46F4</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/arytbk/TBK_Jewish_Clock.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1849E521-67F1-4F48-B948-0854DD3B46F4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1849E521-67F1-4F48-B948-0854DD3B46F4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TBK_Jewish_Clock</string>
+		</dict>
+	</array>
+</dict>
+</plist>
